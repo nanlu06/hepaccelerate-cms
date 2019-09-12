@@ -2592,6 +2592,11 @@ def create_datastructure(dataset_name, is_mc, dataset_era):
             ("Jet_area", "float32"),
             ("Jet_rawFactor", "float32")
         ],
+        "SoftActivityJet": [
+            ("SoftActivityJet_pt", "float32"),
+            ("SoftActivityJet_eta", "float32"),
+            ("SoftActivityJet_phi", "float32"),
+        ],
         "TrigObj": [
             ("TrigObj_pt", "float32"),
             ("TrigObj_eta", "float32"),
@@ -2614,7 +2619,7 @@ def create_datastructure(dataset_name, is_mc, dataset_era):
             ("run", "uint32"),
             ("luminosityBlock", "uint32"),
             ("event", "uint64"),
-            ("SoftActivityJetNjets5", "int32"),
+            #("SoftActivityJetNjets5", "int32"),
             ("fixedGridRhoFastjetAll", "float32"),
         ],
     }
