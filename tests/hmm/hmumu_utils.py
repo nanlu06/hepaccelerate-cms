@@ -211,6 +211,21 @@ def analyze_data(
             ret_mu["selected_muons"],
             dtype=NUMPY_LIB.int8)
         assert(NUMPY_LIB.all(z[z!=0] == 2))
+        
+    if parameters["do_geofit"]:
+        if debug:
+            print("Before applying GeoFit corrections: muons.pt={0:.2f} +- {1:.2f}".format(muons.pt.mean(), muons.pt.std()))
+
+        if debug:
+            for evtid in debug_event_ids:
+                idx = np.where(scalars["event"] == evtid)[0][0]
+                print("muons")
+                jaggedstruct_print(muons, idx,
+                    ["pt", "eta", "phi", "charge", "dxybs"])
+
+        do_geofit_corrections(analysis_corrections.miscvariables, muons, dataset_era)
+        if debug:
+            print("After applying Geofit corrections muons.pt={0:.2f} +- {1:.2f}".format(muons.pt.mean(), muons.pt.std()))
  
     # Create arrays with just the leading and subleading particle contents for easier management
     mu_attrs = ["pt", "eta", "phi", "mass", "pdgId", "nTrackerLayers", "charge", "ptErr"]
@@ -1134,7 +1149,7 @@ def get_histogram(data, weights, bins, mask=None):
  
 #remove parallel running for safety - it's not clear if different loop iterations modify overlapping data, which is not allowed
 @numba.njit(parallel=False)
-def fix_muon_fsrphoton_index(offsets_fsrphotons, offsets_muons, fsrphotons_dROverEt2, fsrphotons_muonIdx, muons_fsrPhotonIdx, out_muons_fsrPhotonIdx):
+def fix_muon_fsrphoton_index(mu_pt, mu_eta, mu_phi, mu_mass, offsets_fsrphotons, offsets_muons, fsrphotons_dROverEt2, fsrphotons_relIso03, fsrphotons_pt, fsrphotons_muonIdx, muons_fsrPhotonIdx, out_muons_fsrPhotonIdx):
     for iev in range(len(offsets_fsrphotons) - 1):
         k = 0
         for i in range(offsets_fsrphotons[iev], offsets_fsrphotons[iev + 1]):
@@ -1144,10 +1159,25 @@ def fix_muon_fsrphoton_index(offsets_fsrphotons, offsets_muons, fsrphotons_dROve
             #Index of FSR photon associated to muon
             fidx = offsets_fsrphotons[iev] + muons_fsrPhotonIdx[midx]
 
-            if k != muons_fsrPhotonIdx[midx]:
-                if fsrphotons_dROverEt2[i] < fsrphotons_dROverEt2[fidx]:
-                    out_muons_fsrPhotonIdx[midx] = k
+            px = mu_pt[midx] * np.cos(mu_phi[midx])
+            py = mu_pt[midx] * np.sin(mu_phi[midx])
+            pz = mu_pt[midx] * np.sinh(mu_eta[midx])
+            mu_e = np.sqrt(px**2 + py**2 + pz**2 + mu_mass[midx]**2)
+
+            sel_fsr = fsrphotons_dROverEt2[fidx] < 0.012 and (fsrphotons_relIso03[fidx] < 1.8 and fsrphotons_pt[fidx]/mu_e < 0.4)
+            sel_check_fsr = fsrphotons_dROverEt2[i] < 0.012 and (fsrphotons_relIso03[i] < 1.8 and fsrphotons_pt[i]/mu_e < 0.4)
+            if sel_fsr or sel_check_fsr:
+                if k != muons_fsrPhotonIdx[midx]:
+                    if not sel_fsr:
+                        out_muons_fsrPhotonIdx[midx] = k
+                    else:
+                        if sel_check_fsr:
+                            if fsrphotons_dROverEt2[i] < fsrphotons_dROverEt2[fidx]:
+                                out_muons_fsrPhotonIdx[midx] = k
+            else:
+               out_muons_fsrPhotonIdx[midx] = -1
             k = k + 1
+
 
 def get_selected_muons(
     scalars,
@@ -1174,19 +1204,22 @@ def get_selected_muons(
 
     if fsrphotons:
         out_muons_fsrPhotonIdx = NUMPY_LIB.asnumpy(muons.fsrPhotonIdx)
+        mu_pt = NUMPY_LIB.asnumpy(muons.pt)
+        mu_eta = NUMPY_LIB.asnumpy(muons.eta)
+        mu_phi = NUMPY_LIB.asnumpy(muons.phi)
+        mu_mass = NUMPY_LIB.asnumpy(muons.mass)
+        mu_iso = NUMPY_LIB.asnumpy(muons.pfRelIso04_all)
         fix_muon_fsrphoton_index(
+            mu_pt, mu_eta, mu_phi, mu_mass,
             NUMPY_LIB.asnumpy(fsrphotons.offsets),
             NUMPY_LIB.asnumpy(muons.offsets),
             NUMPY_LIB.asnumpy(fsrphotons.dROverEt2),
+            NUMPY_LIB.asnumpy(fsrphotons.relIso03),
+            NUMPY_LIB.asnumpy(fsrphotons.pt),
             NUMPY_LIB.asnumpy(fsrphotons.muonIdx),
             NUMPY_LIB.asnumpy(muons.fsrPhotonIdx),
             out_muons_fsrPhotonIdx
         )
-        mu_pt = NUMPY_LIB.asnumpy(muons.pt) 
-        mu_eta = NUMPY_LIB.asnumpy(muons.eta) 
-        mu_phi = NUMPY_LIB.asnumpy(muons.phi) 
-        mu_mass = NUMPY_LIB.asnumpy(muons.mass)
-        mu_iso = NUMPY_LIB.asnumpy(muons.pfRelIso04_all) 
         correct_muon_with_fsr(
             NUMPY_LIB.asnumpy(muons.offsets),
             NUMPY_LIB.asnumpy(fsrphotons.offsets),
@@ -2026,8 +2059,12 @@ def get_gen_sumweights(filenames):
     for fi in filenames:
         ff = uproot.open(fi)
         bl = ff.get("Runs")
-        arr = bl.array("genEventSumw")
-        arr2 = bl.array("genEventSumw2")
+        try:
+            arr = bl.array("genEventSumw")
+            arr2 = bl.array("genEventSumw2")
+        except KeyError:
+            arr = bl.array("genEventSumw_")
+            arr2 = bl.array("genEventSumw2_")
         sumw += arr.sum()
         sumw2 += arr2.sum()
     return sumw, sumw2
@@ -2043,6 +2080,26 @@ def get_lumis(filenames):
         runs += [arr]
         luminosityBlock += [arr2]
     return np.hstack(runs), np.hstack(luminosityBlock)
+
+"""
+Applies Geofit corrections on the selected two muons, returns the corrected pt
+    
+    returns: nothing
+"""
+def do_geofit_corrections(
+    miscvariables,
+    muons,
+    dataset_era):
+    years = int(dataset_era)*NUMPY_LIB.ones(len(muons.pt), dtype=NUMPY_LIB.int8)
+    muon_pt_corr = miscvariables.ptcorrgeofit(
+        NUMPY_LIB.asnumpy(muons.dxybs),
+        NUMPY_LIB.asnumpy(muons.pt),
+        NUMPY_LIB.asnumpy(muons.eta),
+        NUMPY_LIB.asnumpy(muons.charge),
+        years
+    )
+    muons.pt[:] = muon_pt_corr[:]
+    return
 
 """
 Applies Rochester corrections on leading and subleading muons, returns the corrected pt
@@ -3095,7 +3152,7 @@ def create_datastructure(dataset_name, is_mc, dataset_era, do_fsr=False):
         "Muon": [
             ("Muon_pt", "float32"), ("Muon_eta", "float32"),
             ("Muon_phi", "float32"), ("Muon_mass", "float32"),
-            ("Muon_pdgId", "int32"),
+            ("Muon_pdgId", "int32"), ("Muon_dxybs", "float32"),
             ("Muon_pfRelIso04_all", "float32"), ("Muon_mediumId", "bool"),
             ("Muon_tightId", "bool"), ("Muon_charge", "int32"),
             ("Muon_isGlobal", "bool"), ("Muon_isTracker", "bool"),
