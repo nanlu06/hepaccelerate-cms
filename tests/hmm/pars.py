@@ -306,7 +306,7 @@ extra_plot_kwargs = {
 controlplots_shape = [
     "inv_mass",
     "dnn_pred2",
-    "dnnPisa_predf"
+    "dnnPisa_pred_atanh"
 ]
 
 cross_sections = {
@@ -555,7 +555,7 @@ varnames = {
     "dRmin_mj": "min $\Delta R (\mu j)$",
     "dijet_inv_mass": "dijet invariant mass $M_{jj} [GeV]",
     "dnn_pred2": "signal DNN", 
-    "dnnPisa_predf": "signal Pisa DNN",
+    "dnnPisa_pred_atanh": "signal Pisa DNN",
     "eta_mmjj": "$\eta_{\mu\mu j_1 j_2}$",
     "hmmthetacs": "$\theta_{CS}$",
     "inv_mass": "$M_{\mu\mu}$",
@@ -632,7 +632,7 @@ analysis_parameters = {
         "jet_btag_medium": {"2016": 0.6321, "2017": 0.4941, "2018": 0.4184},
         "jet_btag_loose": {"2016": 0.2217, "2017": 0.1522, "2018": 0.1241},
         "do_factorized_jec": True,
-        "apply_btag": True,
+        "apply_btag": False,
         "softjet_pt5": 5.0,
         "softjet_pt2": 2.0,
         "softjet_evt_dr2": 0.16, 
@@ -766,7 +766,7 @@ histo_bins = {
     "massErr": np.linspace(0, 10, 101, dtype=np.float32),
     "massErr_rel": np.linspace(0, 0.05, 101, dtype=np.float32),
     "DeepCSV": np.linspace(0, 1, 11, dtype=np.float32),
-    "dnnPisa_pred" : np.linspace(0,1,1001, dtype=np.float32),
+    "dnnPisa_pred" : np.linspace(0,5,5001, dtype=np.float32),
 
 }
 for hname, bins in analysis_parameters["baseline"]["dnn_input_histogram_bins"].items():
@@ -795,4 +795,24 @@ histo_bins["dnnPisa_predf"] = {
     "h_sideband": np.array([0.0, 0.797, 0.892, 0.939, 0.964, 0.976, 0.983, 0.988, 0.991, 0.994, 0.996, 0.998, 1.0], dtype=np.float32),
 }
 
+histo_bins["dnnPisa_pred_atanh"] = {
+    "2016":{
+        "h_peak": np.array([0, 1.09, 1.43333333333, 1.72666666667, 2.00333333333, 2.21166666667, 2.38, 2.555, 2.71833333333, 2.885, 3.095, 3.34, 5.0], dtype=np.float32),
+        "z_peak": np.array([0, 1.09, 1.43333333333, 1.72666666667, 2.00333333333, 2.21166666667, 2.38, 2.555, 2.71833333333, 2.885, 3.095, 3.34, 5.0], dtype=np.float32),
+        "h_sideband": np.array([0, 1.09, 1.43333333333, 1.72666666667, 2.00333333333, 2.21166666667, 2.38, 2.555, 2.71833333333, 2.885, 3.095, 3.34, 5.0], dtype=np.float32),
+    },
+    "2017":{
+        "h_peak": np.array([0, 1.09, 1.43333333333, 1.72666666667, 2.00333333333, 2.21166666667, 2.38, 2.555, 2.71833333333, 2.885, 3.095, 3.34, 5.0], dtype=np.float32),
+        "z_peak": np.array([0, 1.09, 1.43333333333, 1.72666666667, 2.00333333333, 2.21166666667, 2.38, 2.555, 2.71833333333, 2.885, 3.095, 3.34, 5.0], dtype=np.float32),
+        "h_sideband": np.array([0, 1.09, 1.43333333333, 1.72666666667, 2.00333333333, 2.21166666667, 2.38, 2.555, 2.71833333333, 2.885, 3.095, 3.34, 5.0], dtype=np.float32),
+
+    },
+    "2018":{
+        "h_peak": np.array([0, 0.543333333333, 0.975, 1.26, 1.44666666667, 1.60666666667, 1.75, 1.89, 2.01833333333, 2.14333333333, 2.26166666667, 2.36833333333, 2.46666666667, 2.56666666667, 2.66166666667, 2.76166666667, 2.87166666667, 2.985, 3.11, 3.26166666667, 3.48, 5.0], dtype=np.float32),
+
+        "z_peak": np.array([0, 0.543333333333, 0.975, 1.26, 1.44666666667, 1.60666666667, 1.75, 1.89, 2.01833333333, 2.14333333333, 2.26166666667, 2.36833333333, 2.46666666667, 2.56666666667, 2.66166666667, 2.76166666667, 2.87166666667, 2.985, 3.11, 3.26166666667, 3.48, 5.0], dtype=np.float32),
+
+        "h_sideband": np.array([0, 0.543333333333, 0.975, 1.26, 1.44666666667, 1.60666666667, 1.75, 1.89, 2.01833333333, 2.14333333333, 2.26166666667, 2.36833333333, 2.46666666667, 2.56666666667, 2.66166666667, 2.76166666667, 2.87166666667, 2.985, 3.11, 3.26166666667, 3.48, 5.0], dtype=np.float32),
+    },
+}
 analysis_parameters["baseline"]["histo_bins"] = histo_bins
