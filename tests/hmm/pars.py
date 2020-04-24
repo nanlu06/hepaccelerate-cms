@@ -439,7 +439,51 @@ VBF_STXS_unc = ["THU_VBF_Yield", "THU_VBF_Mjj60", "THU_VBF_Mjj120", "THU_VBF_Mjj
 
 shape_systematics = jec_unc + jer_unc + VBF_STXS_unc + ["trigger", "id", "iso", "jet_puid", "qgl_weight", "puWeight", "L1PreFiringWeight","DYLHEScaleWeightZ","EWZLHEScaleWeightZ","DYLHEScaleWeight","EWZLHEScaleWeight","btag_weight_bcFl","btag_weight_lFl","LHEPdfWeight","EWZ105160PS", "VBFHPS"] 
 common_scale_uncertainties = {
-    "lumi": 1.025,
+    "lumi2016": {
+        "2016":1.022,
+        "2017":1.0,
+        "2018":1.0,
+    },
+    "lumi2017": {
+        "2016":1.0,
+        "2017":1.02,
+        "2018":1.0,
+    },
+    "lumi2018": {
+        "2016":1.0,
+        "2017":1.0,
+        "2018":1.015,
+    },
+    "lumi_XYfac":{
+        "2016":1.009,
+        "2017":1.008,
+        "2018":1.02,
+    },
+    "lumi_lengthScale":{
+        "2016":1.0,
+        "2017":1.003,
+        "2018":1.002,
+    },
+    "lumi_BBDeflect":{
+        "2016":1.004,
+        "2017":1.004,
+        "2018":1.0,
+    },
+    "lumi_dynamicBeta":{
+        "2016":1.005,
+        "2017":1.005,
+        "2018":1.0,
+    },
+    "lumi_beamCalib":{
+        "2016":1.0,
+        "2017":1.003,
+        "2018":1.002,
+    },
+    "lumi_ghostSat":{
+        "2016":1.004,
+        "2017":1.001,
+        "2018":1.0,
+    },
 }
 scale_uncertainties = {
     "ww_2l2nu": {"VVxsec": 1.10},

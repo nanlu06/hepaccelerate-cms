@@ -670,6 +670,7 @@ def create_datacard_combine(
     combined_all_processes.pop(combined_all_processes.index("data"))
     shape_uncertainties = {v:1.0 for v in variations}
     cat = Category(
+        era=era,
         name=histname,
         processes=list(combined_all_processes),
         signal_processes=combined_signal_processes,
@@ -757,7 +758,7 @@ class Category:
         self.full_name = self.name
         self.rebin = kwargs.get("rebin", 1)
         self.do_limit = kwargs.get("do_limit", True)
-
+        self.era = kwargs.get("era")
 
         self.cuts = kwargs.get("cuts", [])
 
@@ -778,7 +779,7 @@ class Category:
             for systname, systval in common_shape_uncertainties.items():
                 self.shape_uncertainties[proc][systname] = systval
             for systname, systval in common_scale_uncertainties.items():
-                self.scale_uncertainties[proc][systname] = systval
+                self.scale_uncertainties[proc][systname] = systval[self.era]
 
         #Load the process-dependent shape uncertainties
         self.proc_shape_uncertainties = kwargs.get("shape_uncertainties", {})
@@ -1192,7 +1193,6 @@ if __name__ == "__main__":
                     outdir_datacards + "/{0}.txt".format(var),
                     era
                 )]
-
                 hdata = res["data"][analysis][var]["nominal"]
                 plot_args += [(
                     histos, hdata, mc_samples, analysis,
