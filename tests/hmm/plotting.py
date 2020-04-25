@@ -9,7 +9,7 @@ import uproot
 import copy
 import multiprocessing
 
-from pars import catnames, varnames, analysis_names, shape_systematics, controlplots_shape, genweight_scalefactor, lhe_pdf_variations
+from pars import catnames, varnames, analysis_names, shape_systematics, controlplots_shape, genweight_scalefactor, lhe_pdf_variations, jer_unc
 from pars import process_groups, colors, extra_plot_kwargs,proc_grps,combined_signal_samples, remove_proc
 
 from scipy.stats import wasserstein_distance
@@ -1039,12 +1039,15 @@ def PrintDatacard(categories, dict_procs, era, event_counts, filenames, ofname):
         dcof.write("RZ rateParam {0} dy_2j 1 \n".format(cat.full_name)) 
         #dcof.write("REWZ rateParam {0} ewk_lljj_mll50_mjj120 1 \n".format(cat.full_name))
     elif ("h_peak" in cat.full_name) or ("h_sideband" in cat.full_name):
-        dcof.write("R_01j rateParam {0} dy_m105_160_amc_01j 1 \n".format(cat.full_name))           
-        dcof.write("R_01j rateParam {0} dy_m105_160_vbf_amc_01j 1 \n".format(cat.full_name))
-        dcof.write("R_2j rateParam {0} dy_m105_160_amc_2j 1 \n".format(cat.full_name))
-        dcof.write("R_2j rateParam {0} dy_m105_160_vbf_amc_2j 1 \n".format(cat.full_name))
+        dcof.write("R_01j_{1} rateParam {0} dy_m105_160_amc_01j 1 \n".format(cat.full_name,str(era)))           
+        dcof.write("R_01j_{1} rateParam {0} dy_m105_160_vbf_amc_01j 1 \n".format(cat.full_name,str(era)))
+        dcof.write("R_2j_{1} rateParam {0} dy_m105_160_amc_2j 1 \n".format(cat.full_name,str(era)))
+        dcof.write("R_2j_{1} rateParam {0} dy_m105_160_vbf_amc_2j 1 \n".format(cat.full_name,str(era)))
         #dcof.write("REWZ rateParam {0} ewk_lljj_mll105_160 1 \n".format(cat.full_name))
     dcof.write("{0} autoMCStats 0 0 1 \n".format(cat.full_name))
+    
+    for jer_syst in jer_unc:
+        dcof.write("nuisance edit rename .*.* * {0} {0}_{1} \n".format(jer_syst,str(era)))
     dcof.write("\n")
     dcof.write("# Execute with:\n")
     dcof.write("# combine -n {0} -M FitDiagnostics -t -1 {1} \n".format(cat.full_name, os.path.basename(ofname)))
