@@ -107,7 +107,7 @@ proc_grps = [
         ("stop", ["st_tw_top", "st_tw_antitop"]),
         ("tt", ["ttjets_sl", "ttjets_dl",]),
     ]
-combined_signal_samples= ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125", "zh_","vh_125", "tth_125"]
+combined_signal_samples= ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125", "vh_125", "tth_125"]
 combined_categories = {
     "dimuon": {
         "datacard_processes" : [
