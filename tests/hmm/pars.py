@@ -107,7 +107,7 @@ proc_grps = [
         ("stop", ["st_tw_top", "st_tw_antitop"]),
         ("tt", ["ttjets_sl", "ttjets_dl",]),
     ]
-combined_signal_samples= ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125", "vh_125", "tth_125"]
+combined_signal_samples= ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125", "zh_","vh_125", "tth_125"]
 combined_categories = {
     "dimuon": {
         "datacard_processes" : [
@@ -435,13 +435,25 @@ jer_unc = ["jerB1","jerB2","jerEC1","jerEC2","jerF1","jerF2"]
 #Uncomment to use just the total JEC for quick tests
 #jec_unc = ["Total"]
 
+#qcd uncertainties for VBF
 VBF_STXS_unc = ["THU_VBF_Yield", "THU_VBF_Mjj60", "THU_VBF_Mjj120", "THU_VBF_Mjj350", "THU_VBF_PTH200", "THU_VBF_PTH25", "THU_VBF_JET01", "THU_VBF_Mjj1000", "THU_VBF_Mjj700", "THU_VBF_Mjj1500"]
 
 shape_systematics = jec_unc + jer_unc + VBF_STXS_unc + ["trigger", "id", "iso", "jet_puid", "qgl_weight", "puWeight", "L1PreFiringWeight","DYLHEScaleWeightZ","EWZLHEScaleWeightZ","DYLHEScaleWeight","EWZLHEScaleWeight","btag_weight_bcFl","btag_weight_lFl","LHEPdfWeight","EWZ105160PS", "VBFHPS"] 
 common_scale_uncertainties = {
     "lumi": 1.025,
 }
+
+#http://twiki.ihep.ac.cn/twiki/view/CMS/CombineTutorial
 scale_uncertainties = {
+    "ggh_amcPS_pythia_125": {"THU_ggh_pdfas": 1.032},
+    "ggh_amcPS_pythia_125": {"THU_ggh_qcdscale": "1.046/0.933"},
+    "vbf_powheg_pythia_dipole_125": {"THU_vbf_pdfas": 1.021},
+    "vh_125": {"THU_vh_pdfas": 1.019},
+    "vh_125": {"THU_vh_qcdscale": "1.005/0.993"},
+    #"zh_125": {"THU_zh_pdfas": 1.016},
+    #"zh_125": {"THU_zh_qcdscale": 1.038/0.969},
+    "tth_125": {"THU_tth_pdfas": 1.036},
+    "tth_125": {"THU_tth_qcdscale": "1.058/0.908"},
     "ww_2l2nu": {"VVxsec": 1.10},
     "wz_3lnu": {"VVxsec": 1.10},
     "wz_2l2q": {"VVxsec": 1.10},
