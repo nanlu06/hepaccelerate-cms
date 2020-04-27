@@ -436,9 +436,9 @@ def mask_inv_mass(hist):
     hist["contents_w2"][bin_idx1:bin_idx2] = 0.0
 
 def create_variated_histos(weight_xs, proc,
-    hdict, hdict_vbf_ps_ref, vbf_ps_ref, hdict_vbf_ps_herwig, vbf_ps_herwig, hdict_ps_pythia, ps_pythia, hdict_ps_herwig, ps_herwig, era,
-    baseline="nominal",
-        variations=shape_systematics):
+                           hdict, hdict_vbf_ps_ref, vbf_ps_ref, hdict_vbf_ps_herwig, vbf_ps_herwig, hdict_ps_pythia, ps_pythia, hdict_ps_herwig, ps_herwig, era, histname,
+                           baseline="nominal",
+                           variations=shape_systematics):
     if not baseline in hdict.keys():
         raise KeyError("baseline histogram missing")
    
@@ -532,7 +532,7 @@ def create_variated_histos(weight_xs, proc,
         elif('ewk' in proc):
             ret['EWZLHEScaleWeightZUp']=h_nom_up
             ret['EWZLHEScaleWeightZDown']=h_nom_down
-
+    
     if('LHEPdfWeight' in variations):
         h_pdf =[]
         h_pdf_up = copy.deepcopy(hbase)
@@ -565,7 +565,16 @@ def create_variated_histos(weight_xs, proc,
         ret['LHEPdfNom']=h_pdf_nom
         ret['LHEPdfWeightUp']=h_pdf_up
         ret['LHEPdfWeightDown']=h_pdf_down
-        
+
+    if('DYshape_DNN' in variations and 'dy' in proc and 'dnnPisa_pred' in histname):
+        h_dyShape_up = copy.deepcopy(hbase)
+        h_dyShape_down = copy.deepcopy(hbase)
+        for r in range(len(dymodel_DNN_reshape[era])):
+            h_dyShape_up.contents[r] = h_dyShape_up.contents[r]*dymodel_DNN_reshape[era][r]
+            h_dyShape_down.contents[r] = 2*h_dyShape_down.contents[r] - h_dyShape_up.contents[r]
+        ret['DYshape_DNNUp']=h_dyShape_up
+        ret['DYshape_DNNDown']=h_dyShape_down
+
     return ret
 
 def create_datacard(dict_procs, parameter_name, all_processes, histname, baseline, variations, weight_xs, era):
@@ -600,7 +609,7 @@ def create_datacard(dict_procs, parameter_name, all_processes, histname, baselin
         if proc == "data":
             _variations = []
 
-        variated_histos = create_variated_histos(weight_xs, proc, rr, rr_vbf_ps_ref, vbf_ps_ref, rr_vbf_ps_herwig, vbf_ps_herwig, rr_ps_pythia, ps_pythia, rr_ps_herwig, ps_herwig, era, baseline, _variations)
+        variated_histos = create_variated_histos(weight_xs, proc, rr, rr_vbf_ps_ref, vbf_ps_ref, rr_vbf_ps_herwig, vbf_ps_herwig, rr_ps_pythia, ps_pythia, rr_ps_herwig, ps_herwig, era, histname, baseline, _variations)
 
         for syst_name, histo in variated_histos.items():
             if proc != "data":
@@ -1177,6 +1186,7 @@ if __name__ == "__main__":
 
                 histos = {}
                 for sample in mc_samples + ["data"]:
+                    print(sample)
                     histos[sample] = res[sample][analysis][var]
 
                 print(era, analysis, var)
@@ -1212,10 +1222,10 @@ if __name__ == "__main__":
                                 plot_args_shape_syst += [(
                                     histos, hdata, mc_samp, analysis,
                                     var, "nominal", weight_xs, int_lumi, outdir, era, unc)]
-        rets = list(pool.map(make_pdf_plot, plot_args))
+        #rets = list(pool.map(make_pdf_plot, plot_args))
         #rets = list(pool.map(make_pdf_plot, plot_args_weights_off))
         rets = list(pool.map(create_datacard_combine_wrap, datacard_args))
-        rets = list(pool.map(plot_variations, plot_args_shape_syst))
+        #rets = list(pool.map(plot_variations, plot_args_shape_syst))
 
         #for args, retval in zip(datacard_args, rets):
         #    res, hd, mc_samples, analysis, var, weight, weight_xs, int_lumi, outdir, datataking_year = args

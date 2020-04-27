@@ -437,7 +437,7 @@ jer_unc = ["jerB1","jerB2","jerEC1","jerEC2","jerF1","jerF2"]
 
 VBF_STXS_unc = ["THU_VBF_Yield", "THU_VBF_Mjj60", "THU_VBF_Mjj120", "THU_VBF_Mjj350", "THU_VBF_PTH200", "THU_VBF_PTH25", "THU_VBF_JET01", "THU_VBF_Mjj1000", "THU_VBF_Mjj700", "THU_VBF_Mjj1500"]
 
-shape_systematics = jec_unc + jer_unc + VBF_STXS_unc + ["trigger", "id", "iso", "jet_puid", "qgl_weight", "puWeight", "L1PreFiringWeight","DYLHEScaleWeightZ","EWZLHEScaleWeightZ","DYLHEScaleWeight","EWZLHEScaleWeight","btag_weight_bcFl","btag_weight_lFl","LHEPdfWeight","EWZ105160PS", "VBFHPS"] 
+shape_systematics = jec_unc + jer_unc + VBF_STXS_unc + ["trigger", "id", "iso", "jet_puid", "qgl_weight", "puWeight", "L1PreFiringWeight","DYLHEScaleWeightZ","EWZLHEScaleWeightZ","DYLHEScaleWeight","EWZLHEScaleWeight","btag_weight_bcFl","btag_weight_lFl","LHEPdfWeight","EWZ105160PS", "VBFHPS","DYshape_DNN"]
 common_scale_uncertainties = {
     "lumi2016": {
         "2016":1.022,
@@ -520,6 +520,11 @@ HSTXS_rel = {
     "THU_VBF_JET01": [0.0,-0.01025,-0.01025,0.008923,0.008921,0.008906,0.008932,0.008915,0.008909,0.008913,0.008907,0.008899,0.008909,0.008912,0.008913,0.008922,0.008911,0.00888,0.008922,0.008977,0.00894,0.008853,0.008947,0.008907,0.008885],
 }
 
+dymodel_DNN_reshape = {
+    "2016":{(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)},
+    "2017":{},
+    "2018":{}
+}
 lhe_pdf_variations ={
     "2016":103,
     "2017":33,
