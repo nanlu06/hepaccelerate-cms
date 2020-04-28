@@ -9,7 +9,7 @@ import uproot
 import copy
 import multiprocessing
 
-from pars import catnames, varnames, analysis_names, shape_systematics, controlplots_shape, genweight_scalefactor, lhe_pdf_variations, jer_unc
+from pars import catnames, varnames, analysis_names, shape_systematics, controlplots_shape, genweight_scalefactor, lhe_pdf_variations, jer_unc, dymodel_DNN_reshape
 from pars import process_groups, colors, extra_plot_kwargs,proc_grps,combined_signal_samples, remove_proc
 
 from scipy.stats import wasserstein_distance
@@ -284,6 +284,25 @@ def plot_variations(args):
         plot_hist_step(ax, h_pdf_down.edges, h_pdf_down.contents,
                 np.sqrt(h_pdf_down.contents_w2),
                        kwargs_step={"label": "down "+"({0:.3E})".format(np.sum(h_pdf_down.contents))},
+            )
+    if('DYshape_DNN' in unc and 'dy' in mc_samp and 'dnnPisa_pred_atanh' in var):
+        h_dyShape_up = copy.deepcopy(hnom)
+        h_dyShape_down = copy.deepcopy(hnom)
+        if 'h_peak' in var:
+            massbin = 'h_peak'
+        elif 'h_sideband' in var:
+            massbin = 'h_sideband'
+        for r in range(len(dymodel_DNN_reshape[str(datataking_year)][massbin])):
+            h_dyShape_up.contents[r] = h_dyShape_up.contents[r]*dymodel_DNN_reshape[str(datataking_year)][massbin][r]
+            h_dyShape_down.contents[r] = 2*h_dyShape_down.contents[r] - h_dyShape_up.contents[r]
+
+        plot_hist_step(ax, h_dyShape_up.edges, h_dyShape_up.contents,
+                np.sqrt(h_dyShape_up.contents_w2),
+                       kwargs_step={"label": "up "+"({0:.3E})".format(np.sum(h_dyShape_up.contents))},
+            )
+        plot_hist_step(ax, h_dyShape_down.edges, h_dyShape_down.contents,
+                np.sqrt(h_dyShape_down.contents_w2),
+                       kwargs_step={"label": "down "+"({0:.3E})".format(np.sum(h_dyShape_down.contents))},
             )
 
     handles, labels = ax.get_legend_handles_labels()
@@ -566,11 +585,15 @@ def create_variated_histos(weight_xs, proc,
         ret['LHEPdfWeightUp']=h_pdf_up
         ret['LHEPdfWeightDown']=h_pdf_down
 
-    if('DYshape_DNN' in variations and 'dy' in proc and 'dnnPisa_pred' in histname):
+    if('DYshape_DNN' in variations and 'dy' in proc and 'dnnPisa_pred_atanh' in histname):
         h_dyShape_up = copy.deepcopy(hbase)
         h_dyShape_down = copy.deepcopy(hbase)
-        for r in range(len(dymodel_DNN_reshape[era])):
-            h_dyShape_up.contents[r] = h_dyShape_up.contents[r]*dymodel_DNN_reshape[era][r]
+        if 'h_peak' in histname:
+            massbin = 'h_peak'
+        elif 'h_sideband' in histname:
+            massbin = 'h_sideband'
+        for r in range(len(dymodel_DNN_reshape[era][massbin])):
+            h_dyShape_up.contents[r] = h_dyShape_up.contents[r]*dymodel_DNN_reshape[era][massbin][r]
             h_dyShape_down.contents[r] = 2*h_dyShape_down.contents[r] - h_dyShape_up.contents[r]
         ret['DYshape_DNNUp']=h_dyShape_up
         ret['DYshape_DNNDown']=h_dyShape_down
@@ -1151,7 +1174,7 @@ if __name__ == "__main__":
             #print("Processing histnames", histnames)
             
             for var in histnames:
-                if var in ["hist_puweight", "hist__dijet_inv_mass_gen", "hist__dnn_presel__dnn_pred"]:
+                if var in ["hist_puweight", "hist__dijet_inv_mass_gen", "hist__dnn_presel__dnn_pred","hist__dimuon_invmass_h_sideband_cat5__dnnPisa_predf","hist__dimuon_invmass_z_peak_cat5__dnnPisa_predf","hist__dimuon_invmass_h_peak_cat5__dnnPisa_predf"]:
                     print("Skipping {0}".format(var))
                     continue
                 if ("h_peak" in var):
@@ -1186,7 +1209,6 @@ if __name__ == "__main__":
 
                 histos = {}
                 for sample in mc_samples + ["data"]:
-                    print(sample)
                     histos[sample] = res[sample][analysis][var]
 
                 print(era, analysis, var)
@@ -1222,10 +1244,10 @@ if __name__ == "__main__":
                                 plot_args_shape_syst += [(
                                     histos, hdata, mc_samp, analysis,
                                     var, "nominal", weight_xs, int_lumi, outdir, era, unc)]
-        #rets = list(pool.map(make_pdf_plot, plot_args))
+        rets = list(pool.map(make_pdf_plot, plot_args))
         #rets = list(pool.map(make_pdf_plot, plot_args_weights_off))
         rets = list(pool.map(create_datacard_combine_wrap, datacard_args))
-        #rets = list(pool.map(plot_variations, plot_args_shape_syst))
+        rets = list(pool.map(plot_variations, plot_args_shape_syst))
 
         #for args, retval in zip(datacard_args, rets):
         #    res, hd, mc_samples, analysis, var, weight, weight_xs, int_lumi, outdir, datataking_year = args

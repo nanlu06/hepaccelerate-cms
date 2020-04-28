@@ -437,7 +437,7 @@ jer_unc = ["jerB1","jerB2","jerEC1","jerEC2","jerF1","jerF2"]
 
 VBF_STXS_unc = ["THU_VBF_Yield", "THU_VBF_Mjj60", "THU_VBF_Mjj120", "THU_VBF_Mjj350", "THU_VBF_PTH200", "THU_VBF_PTH25", "THU_VBF_JET01", "THU_VBF_Mjj1000", "THU_VBF_Mjj700", "THU_VBF_Mjj1500"]
 
-shape_systematics = jec_unc + jer_unc + VBF_STXS_unc + ["trigger", "id", "iso", "jet_puid", "qgl_weight", "puWeight", "L1PreFiringWeight","DYLHEScaleWeightZ","EWZLHEScaleWeightZ","DYLHEScaleWeight","EWZLHEScaleWeight","btag_weight_bcFl","btag_weight_lFl","LHEPdfWeight","EWZ105160PS", "VBFHPS","DYshape_DNN"]
+shape_systematics = jec_unc + jer_unc + VBF_STXS_unc + ["trigger", "id", "iso", "jet_puid", "qgl_weight", "puWeight", "L1PreFiringWeight","DYLHEScaleWeightZ","EWZLHEScaleWeightZ","DYLHEScaleWeight","EWZLHEScaleWeight","btag_weight_bcFl","btag_weight_lFl","LHEPdfWeight","EWZ105160PS", "VBFHPS", "DYshape_DNN"]
 common_scale_uncertainties = {
     "lumi2016": {
         "2016":1.022,
@@ -521,9 +521,17 @@ HSTXS_rel = {
 }
 
 dymodel_DNN_reshape = {
-    "2016":{(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)},
-    "2017":{},
-    "2018":{}
+    "2016":{"h_peak": (1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0),
+            "h_sideband":(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0),
+        },
+    "2017":{
+        "h_peak": (0.92994809,0.91243807,0.95360662,0.82934225,0.85062510,0.71825451,0.83284172,0.98620012,0.60506094,0.72692690,0.53965073,0.57273795),
+        "h_sideband":(0.9506, 0.9019, 0.8859, 0.8382, 0.7930, 0.8547, 0.7784, 0.7594, 0.7395, 0.6619, 0.7761, 0.7151),
+    },
+    "2018":{
+        "h_peak": (0.5759332879, 0.573720387, 0.5885236839, 0.601320723, 0.5950722616, 0.5450206398, 0.5966303327, 0.53009698, 0.5871653473, 0.5253744182, 0.4766093212, 0.4736074966, 0.4645351221, 0.5132544415, 0.5527561079, 0.4504440696, 0.4185160153, 0.4902335893, 0.4098538518, 0.3715103028, 0.2762315245),
+        "h_sideband":(0.6092282814, 0.5909586363, 0.5858414753, 0.5265520702, 0.5659661274, 0.5483954967, 0.5216695842, 0.5212836105, 0.5107921273, 0.5378651892, 0.5853558613, 0.5349144365, 0.5084657538, 0.503787285, 0.5520937209, 0.4651534904, 0.4270156473, 0.4235630135, 0.6095391412, 0.3923910754, 0.5018464733),
+    }
 }
 lhe_pdf_variations ={
     "2016":103,
