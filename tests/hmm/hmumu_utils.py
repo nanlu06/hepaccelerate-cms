@@ -2950,8 +2950,9 @@ def compute_fill_dnn(
             imodel += 1
         compute_dnnPisaComb(dnnPisaComb_pred, dnnPisa_preds, scalars["event"][dnn_presel], use_cuda)
         dnnPisaComb_pred = NUMPY_LIB.arctanh(dnnPisaComb_pred)
-        for imodel in range(len(dnnPisa_preds)): 
-            dnnPisa_preds[imodel] = NUMPY_LIB.arctanh(dnnPisa_preds[imodel])
+        #### Calculating atanh is expensive, skipping for individual models#####
+        #for imodel in range(len(dnnPisa_preds)): 
+        #    dnnPisa_preds[imodel] = NUMPY_LIB.arctanh(dnnPisa_preds[imodel])
        
     if parameters["do_bdt_ucsd"]:
         hmmthetacs, hmmphics = miscvariables.csangles(
