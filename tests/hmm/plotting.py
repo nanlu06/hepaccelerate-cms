@@ -285,7 +285,7 @@ def plot_variations(args):
                 np.sqrt(h_pdf_down.contents_w2),
                        kwargs_step={"label": "down "+"({0:.3E})".format(np.sum(h_pdf_down.contents))},
             )
-    if('DYshape_DNN' in unc and 'dy' in mc_samp and 'dnnPisa_pred_atanh' in var):
+    if('DYshape_DNN' in unc and 'dy' in mc_samp and 'dnnPisa_pred_atanh' in var and 'z_peak' not in var):
         h_dyShape_up = copy.deepcopy(hnom)
         h_dyShape_down = copy.deepcopy(hnom)
         if 'h_peak' in var:
@@ -585,7 +585,7 @@ def create_variated_histos(weight_xs, proc,
         ret['LHEPdfWeightUp']=h_pdf_up
         ret['LHEPdfWeightDown']=h_pdf_down
 
-    if('DYshape_DNN' in variations and 'dy' in proc and 'dnnPisa_pred_atanh' in histname):
+    if('DYshape_DNN' in variations and 'dy' in proc and 'dnnPisa_pred_atanh' in histname and 'z_peak' not in histname):
         h_dyShape_up = copy.deepcopy(hbase)
         h_dyShape_down = copy.deepcopy(hbase)
         if 'h_peak' in histname:
