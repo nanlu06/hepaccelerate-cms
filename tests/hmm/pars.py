@@ -389,7 +389,7 @@ cross_sections = {
 
 signal_samples = ["ggh_amcPS_pythia_125", "vbf_powhegPS_pythia_125", "wmh_125", "wph_125", "zh_125", "tth_125"]
 
-mass_point = [120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130]
+mass_point = [120, 120.5, 121, 121.5, 122, 122.5, 123, 123.5, 124, 124.5, 125, 125.5, 126, 126.5, 127, 127.5, 128, 128.5, 129, 129.5, 130]
 
 #jec_unc = [
 #    'AbsoluteMPFBias', 'AbsoluteScale', 'AbsoluteStat',
@@ -699,17 +699,17 @@ analysis_parameters = {
         },
         #Pisa Group's DNN input variable order for keras
         "dnnPisa_varlist1_order": ['Mqq_log','Rpt','qqDeltaEta','log(ll_zstar)','NSoft5','HTSoft2','minEtaHQ','CS_phi', 'CS_theta','Higgs_pt','log(Higgs_pt)','Higgs_eta','Mqq','QJet0_pt_touse','QJet1_pt_touse','QJet0_eta','QJet1_eta','QJet0_phi','QJet1_phi','QJet0_qgl','QJet1_qgl','year'],
-        "dnnPisa_varlist2_order_120": ['Higgs_m_120','Higgs_mRelReso','Higgs_mReso_120'],
-        "dnnPisa_varlist2_order_121": ['Higgs_m_121','Higgs_mRelReso','Higgs_mReso_121'],
-	"dnnPisa_varlist2_order_122": ['Higgs_m_122','Higgs_mRelReso','Higgs_mReso_122'],
-	"dnnPisa_varlist2_order_123": ['Higgs_m_123','Higgs_mRelReso','Higgs_mReso_123'],
-	"dnnPisa_varlist2_order_124": ['Higgs_m_124','Higgs_mRelReso','Higgs_mReso_124'],
-        "dnnPisa_varlist2_order_125": ['Higgs_m_125','Higgs_mRelReso','Higgs_mReso_125'],
-        "dnnPisa_varlist2_order_126": ['Higgs_m_126','Higgs_mRelReso','Higgs_mReso_126'],
-	"dnnPisa_varlist2_order_127": ['Higgs_m_127','Higgs_mRelReso','Higgs_mReso_127'],
-	"dnnPisa_varlist2_order_128": ['Higgs_m_128','Higgs_mRelReso','Higgs_mReso_128'],
-	"dnnPisa_varlist2_order_129": ['Higgs_m_129','Higgs_mRelReso','Higgs_mReso_129'],
-        "dnnPisa_varlist2_order_130": ['Higgs_m_130','Higgs_mRelReso','Higgs_mReso_130'],  
+        #"dnnPisa_varlist2_order_120": ['Higgs_m_120','Higgs_mRelReso','Higgs_mReso_120'],
+        #"dnnPisa_varlist2_order_121": ['Higgs_m_121','Higgs_mRelReso','Higgs_mReso_121'],
+	#"dnnPisa_varlist2_order_122": ['Higgs_m_122','Higgs_mRelReso','Higgs_mReso_122'],
+	#"dnnPisa_varlist2_order_123": ['Higgs_m_123','Higgs_mRelReso','Higgs_mReso_123'],
+	#"dnnPisa_varlist2_order_124": ['Higgs_m_124','Higgs_mRelReso','Higgs_mReso_124'],
+        #"dnnPisa_varlist2_order_125": ['Higgs_m_125','Higgs_mRelReso','Higgs_mReso_125'],
+        #"dnnPisa_varlist2_order_126": ['Higgs_m_126','Higgs_mRelReso','Higgs_mReso_126'],
+	#"dnnPisa_varlist2_order_127": ['Higgs_m_127','Higgs_mRelReso','Higgs_mReso_127'],
+	#"dnnPisa_varlist2_order_128": ['Higgs_m_128','Higgs_mRelReso','Higgs_mReso_128'],
+	#"dnnPisa_varlist2_order_129": ['Higgs_m_129','Higgs_mRelReso','Higgs_mReso_129'],
+        #"dnnPisa_varlist2_order_130": ['Higgs_m_130','Higgs_mRelReso','Higgs_mReso_130'],  
         
         #Irene's DNN input variable order for keras
         "dnn_varlist_order": ['HTSoft5', 'dRmm','dEtamm','M_jj','pt_jj','eta_jj','phi_jj','M_mmjj','eta_mmjj','phi_mmjj','dEta_jj','Zep','minEtaHQ','minPhiHQ','dPhimm','leadingJet_pt','subleadingJet_pt','massErr_rel', 'leadingJet_eta','subleadingJet_eta','leadingJet_qgl','subleadingJet_qgl','cthetaCS','Higgs_pt','Higgs_eta','Higgs_mass'],
@@ -754,10 +754,6 @@ analysis_parameters = {
     }, #end of baseline
 }
 
-#for imass in mass_point:
-#   print(imass)
-#    analysis_parameters["baseline"]["dnnPisa_varlist2_order_"+str(imass)]: ['Higgs_m_'+str(imass),'Higgs_mRelReso','Higgs_mReso_'+str(imass)]
-
 #define the histogram binning
 histo_bins = {
     "muon_pt": np.linspace(0, 200, 101, dtype=np.float32),
@@ -775,9 +771,12 @@ histo_bins = {
     "massErr": np.linspace(0, 10, 101, dtype=np.float32),
     "massErr_rel": np.linspace(0, 0.05, 101, dtype=np.float32),
     "DeepCSV": np.linspace(0, 1, 11, dtype=np.float32),
-    "dnnPisa_pred" : np.linspace(0,1,1001, dtype=np.float32),
-
+    #"dnnPisa_pred" : np.linspace(0,1,1001, dtype=np.float32),
 }
+for imass in mass_point:
+    histo_bins["dnnPisa_pred_"+str(imass)] = np.linspace(0,1,1001, dtype=np.float32)
+    analysis_parameters["baseline"]["dnnPisa_varlist2_order_"+str(imass)] = ['Higgs_m_'+str(imass),'Higgs_mRelReso','Higgs_mReso_'+str(imass)]
+
 for hname, bins in analysis_parameters["baseline"]["dnn_input_histogram_bins"].items():
     histo_bins[hname] = np.linspace(bins[0], bins[1], bins[2], dtype=np.float32)
 
