@@ -690,21 +690,21 @@ from uproot_methods.classes.TH1 import from_numpy
 
 def to_th1(hdict, name):
     content = np.array(hdict.contents)
-    content_w2 = np.array(hdict.contents_w2)
+    content_w2 = np.concatenate(([0.0],np.array(hdict.contents_w2),[0.0]))
     edges = np.array(hdict.edges)
-    
+
     #remove inf/nan just in case
     content[np.isinf(content)] = 0
     content_w2[np.isinf(content_w2)] = 0
 
     content[np.isnan(content)] = 0
     content_w2[np.isnan(content_w2)] = 0
-    
+
     #update the error bars
     centers = (edges[:-1] + edges[1:]) / 2.0
     th1 = from_numpy((content, edges))
     th1._fName = name
-    th1._fSumw2 = np.array(hdict.contents_w2)
+    th1._fSumw2 = np.array(content_w2)
     th1._fTsumw2 = np.array(hdict.contents_w2).sum()
     th1._fTsumwx2 = np.array(hdict.contents_w2 * centers).sum()
 
