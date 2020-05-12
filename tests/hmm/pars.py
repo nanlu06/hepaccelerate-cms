@@ -848,7 +848,7 @@ analysis_parameters = {
             "pt_jj": (0,400,41),
             "eta_jj": (-5,5,41),
             "phi_jj": (-5,5,41),
-            #"M_mmjj": (0,2000,11),
+            "M_mmjj": (0,2000,11),
             #"eta_mmjj": (-3,3,11),
             #"phi_mmjj": (-3,3,11),
             "dEta_jj": (-3,3,11),
