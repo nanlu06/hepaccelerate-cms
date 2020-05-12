@@ -37,6 +37,7 @@ categories = {
             #"wz_1l1nu2q",
             "wz_3lnu", 
             "ww_2l2nu", "wz_2l2q", "zz",
+            "ewk_lljj_mll50_mjj120_herwig",
             #"st_top",
             #"st_t_antitop",
             "st_tw_top",
@@ -837,10 +838,10 @@ analysis_parameters = {
         "dnnPisa_varlist1_order": ['Mqq_log','Rpt','qqDeltaEta','log(ll_zstar)','NSoft5','HTSoft2','minEtaHQ','CS_phi', 'CS_theta','Higgs_pt','log(Higgs_pt)','Higgs_eta','Mqq','QJet0_pt_touse','QJet1_pt_touse','QJet0_eta','QJet1_eta','QJet0_phi','QJet1_phi','QJet0_qgl','QJet1_qgl','year'],
         
         #Irene's DNN input variable order for keras
-        "dnn_varlist_order": ['HTSoft5', 'dRmm','dEtamm','M_jj','pt_jj','eta_jj','phi_jj','M_mmjj','eta_mmjj','phi_mmjj','dEta_jj','Zep','minEtaHQ','minPhiHQ','dPhimm','leadingJet_pt','subleadingJet_pt','massErr_rel', 'leadingJet_eta','subleadingJet_eta','leadingJet_qgl','subleadingJet_qgl','cthetaCS','Higgs_pt','Higgs_eta','Higgs_mass'],
+        "dnn_varlist_order": ['HTSoft5', 'dRmm','dEtamm','M_jj','pt_jj','eta_jj','phi_jj','M_mmjj','eta_mmjj','phi_mmjj','dEta_jj','Zep','minEtaHQ','minPhiHQ','dPhimm','leadingJet_pt','subleadingJet_pt','massErr_rel', 'leadingJet_eta','subleadingJet_eta','leadingJet_qgl','subleadingJet_qgl','cthetaCS','Higgs_pt','Higgs_eta','Higgs_m_125'],
         "dnn_input_histogram_bins": {
             "HTSoft5": (0,10,10),
-            #"dRmm": (0,5,11),
+            "dRmm": (0,5,11),
             "dEtamm": (-2,2,11),
             "dPhimm": (-2,2,11),
             "M_jj": (0,2000,41),
@@ -856,7 +857,7 @@ analysis_parameters = {
             "minPhiHQ":(-5,5,11),
             "leadingJet_pt": (0, 200, 41),
             "subleadingJet_pt": (0, 200, 41),
-            #"massErr_rel":(0,0.5,11),
+            "massErr_rel":(0,0.5,11),
             "leadingJet_eta": (-5, 5, 41),
             "subleadingJet_eta": (-5, 5, 41),
             "leadingJet_qgl": (0, 1, 41),
