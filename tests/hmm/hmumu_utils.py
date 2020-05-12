@@ -2888,7 +2888,7 @@ def dnn_variables(hrelresolution, miscvariables, leading_muon, subleading_muon, 
         "Higgs_pt": mm_sph["pt"],
         "Higgs_eta": mm_sph["eta"],
         "Higgs_rapidity": mm_sph["rapidity"],
-        "Higgs_mass": mm_sph["mass"], #fixm
+        "Higgs_mass": mm_sph["mass"],
         #DNN pisa variable
         "Mqq_log": NUMPY_LIB.log(jj_sph["mass"] ),
         "Rpt": mmjj_sph["pt"]/(mm_sph["pt"]+leading_jet["pt"]+subleading_jet["pt"]),
@@ -2986,12 +2986,12 @@ def compute_fill_dnn(
     HTsoft2 = n_sel_HTsoftjet2[dnn_presel]
     dnn_vars = dnn_variables(hrelresolution, miscvariables, leading_muon_s, subleading_muon_s, leading_jet_s, subleading_jet_s, nsoft, nsoftNew, HTsoft, HTsoft2, masses, dataset_name, use_cuda)
     # event-by-event mass resolution
-    dpt1 = (leading_muon_s["ptErr"]*dnn_vars["Higgs_m"]) / (2*leading_muon_s["pt"])
-    dpt2 = (subleading_muon_s["ptErr"]*dnn_vars["Higgs_m"]) / (2*subleading_muon_s["pt"])
+    dpt1 = (leading_muon_s["ptErr"]*dnn_vars["Higgs_mass"]) / (2*leading_muon_s["pt"])
+    dpt2 = (subleading_muon_s["ptErr"]*dnn_vars["Higgs_mass"]) / (2*subleading_muon_s["pt"])
     calibration = get_massErr_calib_factors(leading_muon_s["pt"], NUMPY_LIB.abs(leading_muon_s["eta"]), NUMPY_LIB.abs(subleading_muon_s["eta"]), dataset_era, is_mc)
     mm_massErr = NUMPY_LIB.sqrt(dpt1*dpt1 +dpt2*dpt2) * calibration
     dnn_vars["massErr"] = mm_massErr
-    dnn_vars["massErr_rel"] = mm_massErr / dnn_vars["Higgs_m"]
+    dnn_vars["massErr_rel"] = mm_massErr / dnn_vars["Higgs_mass"]
 
     if dataset_era == "2017":
     	dnn_vars["MET_pt"] = scalars["METFixEE2017_pt"][dnn_presel]
