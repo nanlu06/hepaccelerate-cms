@@ -1153,8 +1153,6 @@ if __name__ == "__main__":
             int_lumi = res["data"]["int_lumi"]
             for mc_samp in res.keys():
                 if mc_samp != "data":
-                    print("mc_samp: ",mc_samp)
-                    if "ggh_amcPS_pythia_120" in mc_samp or "ggh_amcPS_pythia_130" in mc_samp: continue
                     genweights[mc_samp] = res[mc_samp]["genEventSumw"]
                     weight_xs[mc_samp] = get_cross_section(cross_sections, mc_samp, era) * int_lumi / genweights[mc_samp]
            
