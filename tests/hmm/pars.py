@@ -7,9 +7,14 @@ categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
+            "wmh_125",
+            "wph_125",
+            "zh_125",
+            "tth_125",
             #"wz_1l1nu2q",
             "wz_3lnu", 
             "ww_2l2nu", "wz_2l2q", "zz",
+            "ewk_lljj_mll50_mjj120_herwig",
             #"st_top",
             #"st_t_antitop",
             "st_tw_top",
@@ -25,6 +30,10 @@ categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
+            "wmh_125",
+            "wph_125",
+            "zh_125",
+            "tth_125",
             #"wz_1l1nu2q",
             "wz_3lnu", 
             "ww_2l2nu", "wz_2l2q", "zz",
@@ -43,6 +52,10 @@ categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
+            "wmh_125",
+            "wph_125",
+            "zh_125",
+            "tth_125",
             #"wz_1l1nu2q",
             "wz_3lnu", 
             "ww_2l2nu", "wz_2l2q", "zz",
@@ -65,6 +78,10 @@ categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
+            "wmh_125",
+            "wph_125",
+            "zh_125",
+            "tth_125",
             #"wz_1l1nu2q",
             "wz_3lnu", 
             "ww_2l2nu", "wz_2l2q", "zz",
@@ -83,12 +100,13 @@ categories = {
     }
 }
 proc_grps = [
+        ("vh_125",["wmh_125", "wph_125", "zh_125"]),
         ("vv", ["wz_3lnu", "ww_2l2nu", "wz_2l2q", "zz"]),
         ("vvv", ["www","wwz","wzz","zzz"]),
         ("stop", ["st_tw_top", "st_tw_antitop"]),
         ("tt", ["ttjets_sl", "ttjets_dl",]),
     ]
-combined_signal_samples= ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125"]
+combined_signal_samples= ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125", "vh_125", "tth_125"]
 combined_categories = {
     "dimuon": {
         "datacard_processes" : [
@@ -96,8 +114,11 @@ combined_categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
+            "vh_125",
+            "tth_125",
             #"wz_1l1nu2q",
             "vv", 
+            "ewk_lljj_mll50_mjj120_herwig",
             #"st_top",
             #"st_t_antitop",
             "stop",
@@ -112,8 +133,11 @@ combined_categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
+            "vh_125",
+            "tth_125",
             #"wz_1l1nu2q",
             "vv",
+            "ewk_lljj_mll50_mjj120_herwig",
             #"st_top",
             #"st_t_antitop",
             "stop",
@@ -128,6 +152,8 @@ combined_categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
+            "vh_125",
+            "tth_125",
             #"wz_1l1nu2q",
             "vv", 
             "ewk_lljj_mll105_160_ptJ_herwig",
@@ -148,6 +174,8 @@ combined_categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
+            "vh_125",
+            "tth_125",
             #"wz_1l1nu2q",
             "vv", 
             "ewk_lljj_mll105_160_ptJ_herwig",
@@ -177,7 +205,7 @@ colors = {
 remove_proc = ["vbf_powheg_pythia_dipole_125_ref","vbf_powheg_herwig_125","ewk_lljj_mll105_160_herwig", "ewk_lljj_mll105_160_pythia"]
 
 process_groups = [
-    ("higgs", ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125"]),
+    ("higgs", ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125", "wmh_125", "wph_125", "zh_125", "tth_125"]),
     ("vv", ["wz_3lnu", "ww_2l2nu", "wz_2l2q", "zz"]),
     ("vvv", ["www","wwz","wzz","zzz"]),
     ("ewk", ["ewk_lljj_mll50_mjj120_herwig", "ewk_lljj_mll105_160_ptJ_herwig"]),
@@ -389,7 +417,9 @@ cross_sections = {
 
 signal_samples = ["ggh_amcPS_pythia_125", "vbf_powhegPS_pythia_125", "wmh_125", "wph_125", "zh_125", "tth_125"]
 
-mass_point = [120, 120.5, 121, 121.5, 122, 122.5, 123, 123.5, 124, 124.5, 125, 125.5, 126, 126.5, 127, 127.5, 128, 128.5, 129, 129.5, 130]
+mass_point = [125]
+#mass scan
+#[120, 120.5, 121, 121.5, 122, 122.5, 123, 123.5, 124, 124.5, 125, 125.5, 126, 126.5, 127, 127.5, 128, 128.5, 129, 129.5, 130]
 
 #jec_unc = [
 #    'AbsoluteMPFBias', 'AbsoluteScale', 'AbsoluteStat',
