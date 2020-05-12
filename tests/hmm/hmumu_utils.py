@@ -774,15 +774,15 @@ def analyze_data(
                         [
                             (higgs_inv_mass, "inv_mass", histo_bins["inv_mass_{0}".format(massbin_name)]),
                             (leading_jet["pt"], "leading_jet_pt", histo_bins["jet_pt"]),
-                            #(subleading_jet["pt"], "subleading_jet_pt", histo_bins["jet_pt"]),
-                            #(leading_jet["eta"], "leading_jet_eta", histo_bins["jet_eta"]),
-                            #(subleading_jet["eta"], "subleading_jet_eta", histo_bins["jet_eta"]),
-                            #(ret_jet["dijet_inv_mass"], "dijet_inv_mass", histo_bins["dijet_inv_mass"]),
-                            #(scalars["SoftActivityJetNjets5"], "num_soft_jets", histo_bins["numjets"]),
-                            #(ret_jet["num_jets"], "num_jets" , histo_bins["numjets"]),
-                            #(pt_balance, "pt_balance", histo_bins["pt_balance"]),
-                            #(leading_jet["btagDeepB"], "leading_jet_DeepCSV", histo_bins["DeepCSV"]),
-                            #(subleading_jet["btagDeepB"], "subleading_jet_DeepCSV", histo_bins["DeepCSV"]),
+                            (subleading_jet["pt"], "subleading_jet_pt", histo_bins["jet_pt"]),
+                            (leading_jet["eta"], "leading_jet_eta", histo_bins["jet_eta"]),
+                            (subleading_jet["eta"], "subleading_jet_eta", histo_bins["jet_eta"]),
+                            (ret_jet["dijet_inv_mass"], "dijet_inv_mass", histo_bins["dijet_inv_mass"]),
+                            (scalars["SoftActivityJetNjets5"], "num_soft_jets", histo_bins["numjets"]),
+                            (ret_jet["num_jets"], "num_jets" , histo_bins["numjets"]),
+                            (pt_balance, "pt_balance", histo_bins["pt_balance"]),
+                            (leading_jet["btagDeepB"], "leading_jet_DeepCSV", histo_bins["DeepCSV"]),
+                            (subleading_jet["btagDeepB"], "subleading_jet_DeepCSV", histo_bins["DeepCSV"]),
                         ],
                         (dnn_presel & massbin_msk & msk_cat),
                         weights_selected,
@@ -791,17 +791,27 @@ def analyze_data(
                     for imass in mass_point:
                         fill_histograms_several(
                             hists, jet_syst_name, "hist__dimuon_invmass_{0}_cat{1}__".format(massbin_name, icat),
-                            [
-                                (dnn_vars[varname], varname, histo_bins[varname])
-                                for varname in dnn_vars.keys() if varname in histo_bins.keys()
-                            ] + [
-                                (dnn_vars["dnnPisa_pred_"+str(imass)], "dnnPisa_pred_atanh_"+str(imass), histo_bins["dnnPisa_pred_atanh"][dataset_era][massbin_name])
+                            [(dnn_vars["dnnPisa_pred_"+str(imass)], "dnnPisa_pred_atanh_"+str(imass), histo_bins["dnnPisa_pred_atanh"][dataset_era][massbin_name])
                             ],
                             (dnn_presel & massbin_msk & msk_cat)[dnn_presel],
                             weights_in_dnn_presel,
                             use_cuda
                         )
                     #end of mass loop
+
+                    fill_histograms_several(
+                        hists, jet_syst_name, "hist__dimuon_invmass_{0}_cat{1}__".format(massbin_name, icat),
+                        [
+                            (dnn_vars[varname], varname, histo_bins[varname])
+                            for varname in dnn_vars.keys() if varname in histo_bins.keys()
+                        ] + [
+                            (dnn_vars["dnn_pred"], "dnn_pred2", histo_bins["dnn_pred2"][massbin_name])
+                        ],
+                        (dnn_presel & massbin_msk & msk_cat)[dnn_presel],
+                        weights_in_dnn_presel,
+                        use_cuda
+                    )
+             #end of mass loop
          #end of isyst loop
     #end of uncertainty_name loop
 
@@ -3033,9 +3043,9 @@ def compute_fill_dnn(
                     mass_index += 1
             imodel += 1
         compute_dnnPisaComb(dnnPisaComb_pred, dnnPisa_preds, scalars["event"][dnn_presel], len(masses), use_cuda)
+
+        dnnPisaComb_pred = NUMPY_LIB.arctanh(dnnPisaComb_pred)
         #### Calculating atanh is expensive, skipping for individual models#####
-        #for imodel in range(len(dnnPisa_preds)): 
-        #    dnnPisa_preds[imodel] = NUMPY_LIB.arctanh(dnnPisa_preds[imodel])
        
     if parameters["do_bdt_ucsd"]:
         hmmthetacs, hmmphics = miscvariables.csangles(
