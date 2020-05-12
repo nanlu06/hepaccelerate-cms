@@ -451,6 +451,8 @@ btag_unc = ["btag_weight_jes","btag_weight_lf","btag_weight_hfstats1","btag_weig
 
 shape_systematics = jec_unc + jer_unc + VBF_STXS_unc + btag_unc + ["trigger", "id", "iso", "jet_puid", "qgl_weight", "puWeight", "L1PreFiringWeight","DYLHEScaleWeightZ","EWZLHEScaleWeightZ","DYLHEScaleWeight","EWZLHEScaleWeight","LHEPdfWeight","EWZ105160PS", "VBFHPS","DYshape_DNN"] 
 
+decorrelate_syst = jer_unc + btag_unc + ["trigger", "id", "iso", "jet_puid", "qgl_weight", "puWeight", "L1PreFiringWeight", "DYLHEScaleWeight","EWZLHEScaleWeight","EWKLHEScaleWeight_norm", "LHEPdfWeight","LHEPdfWeight_norm","EWZ105160PS", "VBFHPS","DYshape_DNN","TTxsec","STxsec","VVxsec"] 
+
 common_scale_uncertainties = {
     "lumi2016": {
         "2016":1.022,
