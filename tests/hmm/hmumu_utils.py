@@ -412,10 +412,10 @@ def analyze_data(
         [
             (leading_muon["pt"], "leading_muon_pt", histo_bins["muon_pt"]),
             (subleading_muon["pt"], "subleading_muon_pt", histo_bins["muon_pt"]),
-            #(leading_muon["pt"], "leading_muon_eta", histo_bins["muon_eta"]),
-            #(subleading_muon["pt"], "subleading_muon_eta", histo_bins["muon_eta"]),
-            #(higgs_inv_mass, "inv_mass", histo_bins["inv_mass"]),
-            #(scalars["PV_npvsGood"], "npvs", histo_bins["npvs"])
+            (leading_muon["pt"], "leading_muon_eta", histo_bins["muon_eta"]),
+            (subleading_muon["pt"], "subleading_muon_eta", histo_bins["muon_eta"]),
+            (higgs_inv_mass, "inv_mass", histo_bins["inv_mass"]),
+            (scalars["PV_npvsGood"], "npvs", histo_bins["npvs"])
         ],
         ret_mu["selected_events"],
         weights_final,
@@ -586,7 +586,8 @@ def analyze_data(
 
             #compute DNN input variables in 2 muon, >=2jet region
             dnn_presel = (
-                (ret_mu['selected_events']) & (ret_jet["num_jets"] >= 2) & (ret_jet["dijet_inv_mass"]>300) &  
+                (ret_mu['selected_events']) & (ret_jet["num_jets"] >= 2) &
+                #(ret_mu['selected_events']) & (ret_jet["num_jets"] >= 2) & (ret_jet["dijet_inv_mass"]>300) &  
                 (leading_jet["pt"] > parameters["jet_pt_leading"][dataset_era])
             )
             if is_mc and 'dy_m105_160' in dataset_name:
@@ -635,15 +636,15 @@ def analyze_data(
                 [
                     (leading_jet["pt"], "leading_jet_pt", histo_bins["jet_pt"]),
                     (subleading_jet["pt"], "subleading_jet_pt", histo_bins["jet_pt"]),
-                    #(leading_jet["eta"], "leading_jet_eta", histo_bins["jet_eta"]),
-                    #(subleading_jet["eta"], "subleading_jet_eta", histo_bins["jet_eta"]),
-                    #(leading_jet["qgl"], "leading_jet_qgl", histo_bins["jet_qgl"]),
-                    #(subleading_jet["qgl"], "subleading_jet_qgl", histo_bins["jet_qgl"]),
-                    #(ret_jet["dijet_inv_mass"], "dijet_inv_mass", histo_bins["dijet_inv_mass"]),
-                    #(higgs_inv_mass, "inv_mass", histo_bins["inv_mass"]),
-                    #(scalars["SoftActivityJetNjets5"], "num_soft_jets", histo_bins["numjets"]),
-                    #(ret_jet["num_jets"], "num_jets" , histo_bins["numjets"]),
-                    #(pt_balance, "pt_balance", histo_bins["pt_balance"]),
+                    (leading_jet["eta"], "leading_jet_eta", histo_bins["jet_eta"]),
+                    (subleading_jet["eta"], "subleading_jet_eta", histo_bins["jet_eta"]),
+                    (leading_jet["qgl"], "leading_jet_qgl", histo_bins["jet_qgl"]),
+                    (subleading_jet["qgl"], "subleading_jet_qgl", histo_bins["jet_qgl"]),
+                    (ret_jet["dijet_inv_mass"], "dijet_inv_mass", histo_bins["dijet_inv_mass"]),
+                    (higgs_inv_mass, "inv_mass", histo_bins["inv_mass"]),
+                    (scalars["SoftActivityJetNjets5"], "num_soft_jets", histo_bins["numjets"]),
+                    (ret_jet["num_jets"], "num_jets" , histo_bins["numjets"]),
+                    (pt_balance, "pt_balance", histo_bins["pt_balance"]),
                     #(leading_jet["btagDeepB"], "leading_jet_DeepCSV", histo_bins["DeepCSV"]),
                     #(subleading_jet["btagDeepB"], "subleading_jet_DeepCSV", histo_bins["DeepCSV"]),
                 ],
@@ -752,7 +753,7 @@ def analyze_data(
             mbins = [
                     ("h_peak", masswindow_h_peak, parameters["masswindow_h_peak"]),
                     ("h_sideband", masswindow_h_sideband, parameters["masswindow_h_sideband"]),
-                    #("z_peak", masswindow_z_peak, parameters["masswindow_z_peak"]),
+                    ("z_peak", masswindow_z_peak, parameters["masswindow_z_peak"]),
             ]
             if (parameters["split_z_peak"][dataset_era]):
                 mbins += [("z_peak_{0}".format("jerB1"), masswindow_z_peak_jerB1, parameters["masswindow_z_peak"]),
@@ -1497,10 +1498,9 @@ def get_selected_muons(
     additional_muon_sel = muons_passing_id & NUMPY_LIB.invert(muons_passing_os)
     muons.masks["iso_id_aeta"] = passes_iso & passes_id & passes_aeta
     
-    # Get the invariant mass of the dimuon system and compute mass windows
-    higgs_inv_mass, _ = compute_inv_mass(muons, final_event_sel, final_muon_sel, use_cuda)
-    
-    final_event_sel = final_event_sel & (higgs_inv_mass > 100.0)
+    # To save time apply a mass window cut. get the invariant mass of the dimuon system and compute mass windows
+    #higgs_inv_mass, _ = compute_inv_mass(muons, final_event_sel, final_muon_sel, use_cuda)
+    #final_event_sel = final_event_sel & (higgs_inv_mass > 100.0)
     
     if debug:
         for evtid in debug_event_ids:
@@ -2986,14 +2986,12 @@ def compute_fill_dnn(
     HTsoft2 = n_sel_HTsoftjet2[dnn_presel]
     dnn_vars = dnn_variables(hrelresolution, miscvariables, leading_muon_s, subleading_muon_s, leading_jet_s, subleading_jet_s, nsoft, nsoftNew, HTsoft, HTsoft2, masses, dataset_name, use_cuda)
     # event-by-event mass resolution
-    #dpt1 = (leading_muon_s["ptErr"]*dnn_vars["Higgs_m"]) / (2*leading_muon_s["pt"])
-    #dpt2 = (subleading_muon_s["ptErr"]*dnn_vars["Higgs_m"]) / (2*subleading_muon_s["pt"])
-    #calibration = get_massErr_calib_factors(leading_muon_s["pt"], NUMPY_LIB.abs(leading_muon_s["eta"]), NUMPY_LIB.abs(subleading_muon_s["eta"]), dataset_era, is_mc)
-    #mm_massErr = NUMPY_LIB.sqrt(dpt1*dpt1 +dpt2*dpt2) * calibration
-    #dnn_vars["massErr"] = mm_massErr
-    #dnn_vars["massErr_rel"] = mm_massErr / dnn_vars["Higgs_m"]
-    dnn_vars["massErr"] = dnn_vars["Higgs_mass"]
-    dnn_vars["massErr_rel"] = dnn_vars["Higgs_mass"]
+    dpt1 = (leading_muon_s["ptErr"]*dnn_vars["Higgs_m"]) / (2*leading_muon_s["pt"])
+    dpt2 = (subleading_muon_s["ptErr"]*dnn_vars["Higgs_m"]) / (2*subleading_muon_s["pt"])
+    calibration = get_massErr_calib_factors(leading_muon_s["pt"], NUMPY_LIB.abs(leading_muon_s["eta"]), NUMPY_LIB.abs(subleading_muon_s["eta"]), dataset_era, is_mc)
+    mm_massErr = NUMPY_LIB.sqrt(dpt1*dpt1 +dpt2*dpt2) * calibration
+    dnn_vars["massErr"] = mm_massErr
+    dnn_vars["massErr_rel"] = mm_massErr / dnn_vars["Higgs_m"]
 
     if dataset_era == "2017":
     	dnn_vars["MET_pt"] = scalars["METFixEE2017_pt"][dnn_presel]
