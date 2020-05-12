@@ -723,21 +723,21 @@ from uproot_methods.classes.TH1 import from_numpy
 
 def to_th1(hdict, name):
     content = np.array(hdict.contents)
-    content_w2 = np.array(hdict.contents_w2)
+    content_w2 = np.concatenate(([0.0],np.array(hdict.contents_w2),[0.0]))
     edges = np.array(hdict.edges)
-    
+
     #remove inf/nan just in case
     content[np.isinf(content)] = 0
     content_w2[np.isinf(content_w2)] = 0
 
     content[np.isnan(content)] = 0
     content_w2[np.isnan(content_w2)] = 0
-    
+
     #update the error bars
     centers = (edges[:-1] + edges[1:]) / 2.0
     th1 = from_numpy((content, edges))
     th1._fName = name
-    th1._fSumw2 = np.array(hdict.contents_w2)
+    th1._fSumw2 = np.array(content_w2)
     th1._fTsumw2 = np.array(hdict.contents_w2).sum()
     th1._fTsumwx2 = np.array(hdict.contents_w2 * centers).sum()
 
@@ -1153,6 +1153,8 @@ if __name__ == "__main__":
             int_lumi = res["data"]["int_lumi"]
             for mc_samp in res.keys():
                 if mc_samp != "data":
+                    print("mc_samp: ",mc_samp)
+                    if "ggh_amcPS_pythia_120" in mc_samp or "ggh_amcPS_pythia_130" in mc_samp: continue
                     genweights[mc_samp] = res[mc_samp]["genEventSumw"]
                     weight_xs[mc_samp] = get_cross_section(cross_sections, mc_samp, era) * int_lumi / genweights[mc_samp]
            
@@ -1244,10 +1246,10 @@ if __name__ == "__main__":
                                 plot_args_shape_syst += [(
                                     histos, hdata, mc_samp, analysis,
                                     var, "nominal", weight_xs, int_lumi, outdir, era, unc)]
-        rets = list(pool.map(make_pdf_plot, plot_args))
+        #rets = list(pool.map(make_pdf_plot, plot_args))
         #rets = list(pool.map(make_pdf_plot, plot_args_weights_off))
         rets = list(pool.map(create_datacard_combine_wrap, datacard_args))
-        rets = list(pool.map(plot_variations, plot_args_shape_syst))
+        #rets = list(pool.map(plot_variations, plot_args_shape_syst))
 
         #for args, retval in zip(datacard_args, rets):
         #    res, hd, mc_samples, analysis, var, weight, weight_xs, int_lumi, outdir, datataking_year = args

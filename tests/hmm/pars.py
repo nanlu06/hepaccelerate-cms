@@ -7,21 +7,16 @@ categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
-            "wmh_125",
-            "wph_125",
-            "zh_125",
-            "tth_125",
             #"wz_1l1nu2q",
             "wz_3lnu", 
             "ww_2l2nu", "wz_2l2q", "zz",
-            "ewk_lljj_mll50_mjj120_herwig",
             #"st_top",
             #"st_t_antitop",
             "st_tw_top",
             "st_tw_antitop",
             "ttjets_sl", "ttjets_dl",
-            "dy",
-            "www","wwz","wzz","zzz",
+            #"dy",
+            #"www","wwz","wzz","zzz",
         ],
     },
     "z_peak": {
@@ -30,21 +25,16 @@ categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
-            "wmh_125",
-            "wph_125",
-            "zh_125",
-            "tth_125",
             #"wz_1l1nu2q",
             "wz_3lnu", 
             "ww_2l2nu", "wz_2l2q", "zz",
-            "ewk_lljj_mll50_mjj120_herwig",
             #"st_top",
             #"st_t_antitop",
             "st_tw_top",
             "st_tw_antitop",
             "ttjets_sl", "ttjets_dl",
-            "dy_0j", "dy_1j", "dy_2j",
-            "www","wwz","wzz","zzz",
+            #"dy_0j", "dy_1j", "dy_2j",
+            #"www","wwz","wzz","zzz",
         ],
     },
     "h_sideband": {
@@ -53,10 +43,6 @@ categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
-            "wmh_125",
-            "wph_125",
-            "zh_125",
-            "tth_125",
             #"wz_1l1nu2q",
             "wz_3lnu", 
             "ww_2l2nu", "wz_2l2q", "zz",
@@ -70,7 +56,7 @@ categories = {
             "ttjets_sl", "ttjets_dl",
             "dy_m105_160_amc_01j", "dy_m105_160_vbf_amc_01j",
             "dy_m105_160_amc_2j", "dy_m105_160_vbf_amc_2j",
-            "www","wwz","wzz","zzz",
+            #"www","wwz","wzz","zzz",
         ],
     },
     "h_peak": {
@@ -79,10 +65,6 @@ categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
-            "wmh_125",
-            "wph_125",
-            "zh_125",
-            "tth_125",
             #"wz_1l1nu2q",
             "wz_3lnu", 
             "ww_2l2nu", "wz_2l2q", "zz",
@@ -96,18 +78,17 @@ categories = {
             "ttjets_sl", "ttjets_dl",
             "dy_m105_160_amc_01j", "dy_m105_160_vbf_amc_01j",
             "dy_m105_160_amc_2j", "dy_m105_160_vbf_amc_2j",
-            "www","wwz","wzz","zzz",
+            #"www","wwz","wzz","zzz",
         ],
     }
 }
 proc_grps = [
-        ("vh_125",["wmh_125", "wph_125", "zh_125"]),
         ("vv", ["wz_3lnu", "ww_2l2nu", "wz_2l2q", "zz"]),
         ("vvv", ["www","wwz","wzz","zzz"]),
         ("stop", ["st_tw_top", "st_tw_antitop"]),
         ("tt", ["ttjets_sl", "ttjets_dl",]),
     ]
-combined_signal_samples= ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125", "vh_125", "tth_125"]
+combined_signal_samples= ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125"]
 combined_categories = {
     "dimuon": {
         "datacard_processes" : [
@@ -115,17 +96,14 @@ combined_categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
-            "vh_125",
-            "tth_125",
             #"wz_1l1nu2q",
             "vv", 
-            "ewk_lljj_mll50_mjj120_herwig",
             #"st_top",
             #"st_t_antitop",
             "stop",
             "tt",
-            "dy",
-            "vvv",
+            #"dy",
+            #"vvv",
         ],
     },
     "z_peak": {
@@ -134,17 +112,14 @@ combined_categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
-            "vh_125",
-            "tth_125",
             #"wz_1l1nu2q",
             "vv",
-            "ewk_lljj_mll50_mjj120_herwig",
             #"st_top",
             #"st_t_antitop",
             "stop",
             "tt",
-            "dy_0j", "dy_1j", "dy_2j",
-            "vvv",
+            #"dy_0j", "dy_1j", "dy_2j",
+            #"vvv",
         ],
     },
     "h_sideband": {
@@ -153,8 +128,6 @@ combined_categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
-            "vh_125",
-            "tth_125",
             #"wz_1l1nu2q",
             "vv", 
             "ewk_lljj_mll105_160_ptJ_herwig",
@@ -166,7 +139,7 @@ combined_categories = {
             "tt",
             "dy_m105_160_amc_01j", "dy_m105_160_vbf_amc_01j",
             "dy_m105_160_amc_2j", "dy_m105_160_vbf_amc_2j",
-            "vvv",
+            #"vvv",
         ],
     },
     "h_peak": {
@@ -175,8 +148,6 @@ combined_categories = {
             "vbf_powheg_pythia_dipole_125",
             "vbf_powheg_herwig_125",
             "vbf_powheg_pythia_dipole_125_ref",
-            "vh_125",
-            "tth_125",
             #"wz_1l1nu2q",
             "vv", 
             "ewk_lljj_mll105_160_ptJ_herwig",
@@ -188,7 +159,7 @@ combined_categories = {
             "tt",
             "dy_m105_160_amc_01j", "dy_m105_160_vbf_amc_01j",
             "dy_m105_160_amc_2j", "dy_m105_160_vbf_amc_2j",
-            "vvv",
+            #"vvv",
         ],
     }
 }
@@ -206,9 +177,9 @@ colors = {
 remove_proc = ["vbf_powheg_pythia_dipole_125_ref","vbf_powheg_herwig_125","ewk_lljj_mll105_160_herwig", "ewk_lljj_mll105_160_pythia"]
 
 process_groups = [
-    ("higgs", ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125", "wmh_125", "wph_125", "zh_125", "tth_125"]),
+    ("higgs", ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125"]),
     ("vv", ["wz_3lnu", "ww_2l2nu", "wz_2l2q", "zz"]),
-    ("vvv", ["www","wwz","wzz","zzz"]),
+    #("vvv", ["www","wwz","wzz","zzz"]),
     ("ewk", ["ewk_lljj_mll50_mjj120_herwig", "ewk_lljj_mll105_160_ptJ_herwig"]),
     ("stop", ["st_tw_top", "st_tw_antitop"]),
     ("tt", ["ttjets_sl", "ttjets_dl",]),
@@ -356,6 +327,8 @@ cross_sections = {
     "vbf_powhegPS_pythia_120": 9.535E-04,
     "vbf_amc_herwig_120": 9.535E-04,
     "vbf_amcPS_pythia_120": 9.535E-04,
+    "vbf_powheg_pythia_dipole_120": 9.535E-04,
+    "vbf_powheg_pythia_dipole_120_ref": 9.535E-04,
     
     "vbf_powheg_herwig_130": 6.827E-04, #3.637E+00 x 1.877E-04
     "vbf_amcPS_130": 6.827E-04,
@@ -363,6 +336,8 @@ cross_sections = {
     "vbf_powhegPS_pythia_130": 6.827E-04,
     "vbf_amc_herwig_130": 6.827E-04,
     "vbf_amcPS_pythia_130": 6.827E-04,
+    "vbf_powheg_pythia_dipole_130": 6.827E-04,
+    "vbf_powheg_pythia_dipole_130_ref": 6.827E-04,
     
     "wmh_125": 0.000116,
     "wmh_120": 1.476E-04,
@@ -413,6 +388,9 @@ cross_sections = {
 }
 
 signal_samples = ["ggh_amcPS_pythia_125", "vbf_powhegPS_pythia_125", "wmh_125", "wph_125", "zh_125", "tth_125"]
+
+mass_point = [120, 120.5, 121, 121.5, 122, 122.5, 123, 123.5, 124, 124.5, 125, 125.5, 126, 126.5, 127, 127.5, 128, 128.5, 129, 129.5, 130]
+
 #jec_unc = [
 #    'AbsoluteMPFBias', 'AbsoluteScale', 'AbsoluteStat',
 #    'FlavorQCD', 'TimePtEta', 'Fragmentation', 'PileUpDataMC',
@@ -435,9 +413,12 @@ jer_unc = ["jerB1","jerB2","jerEC1","jerEC2","jerF1","jerF2"]
 #Uncomment to use just the total JEC for quick tests
 #jec_unc = ["Total"]
 
+#qcd uncertainties for VBF
 VBF_STXS_unc = ["THU_VBF_Yield", "THU_VBF_Mjj60", "THU_VBF_Mjj120", "THU_VBF_Mjj350", "THU_VBF_PTH200", "THU_VBF_PTH25", "THU_VBF_JET01", "THU_VBF_Mjj1000", "THU_VBF_Mjj700", "THU_VBF_Mjj1500"]
 
-shape_systematics = jec_unc + jer_unc + VBF_STXS_unc + ["trigger", "id", "iso", "jet_puid", "qgl_weight", "puWeight", "L1PreFiringWeight","DYLHEScaleWeightZ","EWZLHEScaleWeightZ","DYLHEScaleWeight","EWZLHEScaleWeight","btag_weight_bcFl","btag_weight_lFl","LHEPdfWeight","EWZ105160PS", "VBFHPS", "DYshape_DNN"]
+btag_unc = ["btag_weight_jes","btag_weight_lf","btag_weight_hfstats1","btag_weight_hfstats2","btag_weight_cferr1","btag_weight_cferr2","btag_weight_hf","btag_weight_lfstats1","btag_weight_lfstats2"]
+shape_systematics = jec_unc + jer_unc + VBF_STXS_unc + btag_unc + ["trigger", "id", "iso", "jet_puid", "qgl_weight", "puWeight", "L1PreFiringWeight","DYLHEScaleWeightZ","EWZLHEScaleWeightZ","DYLHEScaleWeight","EWZLHEScaleWeight","LHEPdfWeight","EWZ105160PS", "VBFHPS"] 
+
 common_scale_uncertainties = {
     "lumi2016": {
         "2016":1.022,
@@ -485,7 +466,22 @@ common_scale_uncertainties = {
         "2018":1.0,
     },
 }
+
+#http://twiki.ihep.ac.cn/twiki/view/CMS/CombineTutorial
+#"zh_125": {"THU_zh_pdfas": 1.016},
+#"zh_125": {"THU_zh_qcdscale": 1.038/0.969},
 scale_uncertainties = {
+    "ggh_amcPS_pythia_125": {"THU_ggh_pdfas": 1.032},
+    "ggh_amcPS_pythia_125": {"THU_ggh_qcdscale": "1.046/0.933"},
+    "vbf_powheg_pythia_dipole_125": {"THU_vbf_pdfas": 1.021},
+    "vh_125": {"THU_vh_pdfas": 1.019},
+    "vh_125": {"THU_vh_qcdscale": "1.005/0.993"},
+    "tth_125": {"THU_tth_pdfas": 1.036},
+    "tth_125": {"THU_tth_qcdscale": "1.058/0.908"},
+    "ggh_amcPS_pythia_125": {"THU_hmm_br": 1.0123},
+    "vbf_powheg_pythia_dipole_125": {"THU_hmm_br": 1.0123},
+    "vh_125": {"THU_hmm_br": 1.0123},
+    "tth_125": {"THU_hmm_br": 1.0123},
     "ww_2l2nu": {"VVxsec": 1.10},
     "wz_3lnu": {"VVxsec": 1.10},
     "wz_2l2q": {"VVxsec": 1.10},
@@ -822,42 +818,52 @@ analysis_parameters = {
                 #"dy_m105_160_vbf_amc": 1,
             },
         },
-       
         #Pisa Group's DNN input variable order for keras
         "dnnPisa_varlist1_order": ['Mqq_log','Rpt','qqDeltaEta','log(ll_zstar)','NSoft5','HTSoft2','minEtaHQ','CS_phi', 'CS_theta','Higgs_pt','log(Higgs_pt)','Higgs_eta','Mqq','QJet0_pt_touse','QJet1_pt_touse','QJet0_eta','QJet1_eta','QJet0_phi','QJet1_phi','QJet0_qgl','QJet1_qgl','year'],
-        "dnnPisa_varlist2_order": ['Higgs_m','Higgs_mRelReso','Higgs_mReso'],
+        #"dnnPisa_varlist2_order_120": ['Higgs_m_120','Higgs_mRelReso','Higgs_mReso_120'],
+        #"dnnPisa_varlist2_order_121": ['Higgs_m_121','Higgs_mRelReso','Higgs_mReso_121'],
+	#"dnnPisa_varlist2_order_122": ['Higgs_m_122','Higgs_mRelReso','Higgs_mReso_122'],
+	#"dnnPisa_varlist2_order_123": ['Higgs_m_123','Higgs_mRelReso','Higgs_mReso_123'],
+	#"dnnPisa_varlist2_order_124": ['Higgs_m_124','Higgs_mRelReso','Higgs_mReso_124'],
+        #"dnnPisa_varlist2_order_125": ['Higgs_m_125','Higgs_mRelReso','Higgs_mReso_125'],
+        #"dnnPisa_varlist2_order_126": ['Higgs_m_126','Higgs_mRelReso','Higgs_mReso_126'],
+	#"dnnPisa_varlist2_order_127": ['Higgs_m_127','Higgs_mRelReso','Higgs_mReso_127'],
+	#"dnnPisa_varlist2_order_128": ['Higgs_m_128','Higgs_mRelReso','Higgs_mReso_128'],
+	#"dnnPisa_varlist2_order_129": ['Higgs_m_129','Higgs_mRelReso','Higgs_mReso_129'],
+        #"dnnPisa_varlist2_order_130": ['Higgs_m_130','Higgs_mRelReso','Higgs_mReso_130'],  
+        
         #Irene's DNN input variable order for keras
-        "dnn_varlist_order": ['HTSoft5', 'dRmm','dEtamm','M_jj','pt_jj','eta_jj','phi_jj','M_mmjj','eta_mmjj','phi_mmjj','dEta_jj','Zep','minEtaHQ','minPhiHQ','dPhimm','leadingJet_pt','subleadingJet_pt','massErr_rel', 'leadingJet_eta','subleadingJet_eta','leadingJet_qgl','subleadingJet_qgl','cthetaCS','Higgs_pt','Higgs_eta','Higgs_m'],
+        "dnn_varlist_order": ['HTSoft5', 'dRmm','dEtamm','M_jj','pt_jj','eta_jj','phi_jj','M_mmjj','eta_mmjj','phi_mmjj','dEta_jj','Zep','minEtaHQ','minPhiHQ','dPhimm','leadingJet_pt','subleadingJet_pt','massErr_rel', 'leadingJet_eta','subleadingJet_eta','leadingJet_qgl','subleadingJet_qgl','cthetaCS','Higgs_pt','Higgs_eta','Higgs_mass'],
         "dnn_input_histogram_bins": {
-            "HTSoft5": (0,10,10),
-            "dRmm": (0,5,11),
-            "dEtamm": (-2,2,11),
-            "dPhimm": (-2,2,11),
-            "M_jj": (0,2000,41),
-            "pt_jj": (0,400,41),
-            "eta_jj": (-5,5,41),
-            "phi_jj": (-5,5,41),
-            "M_mmjj": (0,2000,11),
-            "eta_mmjj": (-3,3,11),
-            "phi_mmjj": (-3,3,11),
-            "dEta_jj": (-3,3,11),
-            "Zep": (-2,2,11),
-            "minEtaHQ":(-5,5,11),
-            "minPhiHQ":(-5,5,11),
+            #"HTSoft5": (0,10,10),
+            #"dRmm": (0,5,11),
+            #"dEtamm": (-2,2,11),
+            #"dPhimm": (-2,2,11),
+            #"M_jj": (0,2000,41),
+            #"pt_jj": (0,400,41),
+            #"eta_jj": (-5,5,41),
+            #"phi_jj": (-5,5,41),
+            #"M_mmjj": (0,2000,11),
+            #"eta_mmjj": (-3,3,11),
+            #"phi_mmjj": (-3,3,11),
+            #"dEta_jj": (-3,3,11),
+            #"Zep": (-2,2,11),
+            #"minEtaHQ":(-5,5,11),
+            #"minPhiHQ":(-5,5,11),
             "leadingJet_pt": (0, 200, 41),
             "subleadingJet_pt": (0, 200, 41),
-            "massErr_rel":(0,0.5,11),
-            "leadingJet_eta": (-5, 5, 41),
-            "subleadingJet_eta": (-5, 5, 41),
-            "leadingJet_qgl": (0, 1, 41),
-            "subleadingJet_qgl": (0, 1, 41),
-            "cthetaCS": (-1, 1, 11),
-            "Higgs_pt": (0, 200, 41),
-            "Higgs_eta": (-3, 3, 41),
-            "Higgs_mass": (110, 150, 41),
-            "hmmthetacs": (-1, 1, 11),
-            "hmmphics": (-4, 4, 11),
-            "dnn_pred": (0, 1, 1001),
+            #"massErr_rel":(0,0.5,11),
+            #"leadingJet_eta": (-5, 5, 41),
+            #"subleadingJet_eta": (-5, 5, 41),
+            #"leadingJet_qgl": (0, 1, 41),
+            #"subleadingJet_qgl": (0, 1, 41),
+            #"cthetaCS": (-1, 1, 11),
+            #"Higgs_pt": (0, 200, 41),
+            #"Higgs_eta": (-3, 3, 41),
+            #"Higgs_mass": (110, 150, 41),
+            #"hmmthetacs": (-1, 1, 11),
+            #"hmmphics": (-4, 4, 11),
+            #"dnn_pred": (0, 1, 1001),
             #"bdt_ucsd": (-1, 1, 11),
             #"bdt2j_ucsd": (-1, 1, 11),
             #"bdt01j_ucsd": (-1, 1, 11)
@@ -865,9 +871,10 @@ analysis_parameters = {
 
         "do_bdt_ucsd": False,
         "do_dnn_pisa": True,
-        "do_dnn_cit": True,
-    },
+        "do_dnn_cit": False,
+    }, #end of baseline
 }
+
 #define the histogram binning
 histo_bins = {
     "muon_pt": np.linspace(0, 200, 101, dtype=np.float32),
@@ -885,9 +892,14 @@ histo_bins = {
     "massErr": np.linspace(0, 10, 101, dtype=np.float32),
     "massErr_rel": np.linspace(0, 0.05, 101, dtype=np.float32),
     "DeepCSV": np.linspace(0, 1, 11, dtype=np.float32),
-    "dnnPisa_pred" : np.linspace(0,5,5001, dtype=np.float32),
+    "dnnPisa_pred" : np.linspace(0,1,1001, dtype=np.float32),
 
 }
+
+for imass in mass_point:
+    histo_bins["dnnPisa_pred_"+str(imass)] = np.linspace(0,1,1001, dtype=np.float32)
+    analysis_parameters["baseline"]["dnnPisa_varlist2_order_"+str(imass)] = ['Higgs_m_'+str(imass),'Higgs_mRelReso','Higgs_mReso_'+str(imass)]
+
 for hname, bins in analysis_parameters["baseline"]["dnn_input_histogram_bins"].items():
     histo_bins[hname] = np.linspace(bins[0], bins[1], bins[2], dtype=np.float32)
 
@@ -907,7 +919,6 @@ histo_bins["dnn_pred2"] = {
     "z_peak_jerF2": np.array([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], dtype=np.float32),
 }
 
-
 histo_bins["dnnPisa_predf"] = {
     "h_peak": np.array([0.0, 0.797, 0.892, 0.939, 0.964, 0.976, 0.983, 0.988, 0.991, 0.994, 0.996, 0.998, 1.0], dtype=np.float32),
     "z_peak": np.array([0.0, 0.797, 0.892, 0.939, 0.964, 0.976, 0.983, 0.988, 0.991, 0.994, 0.996, 0.998, 1.0], dtype=np.float32),
@@ -916,22 +927,23 @@ histo_bins["dnnPisa_predf"] = {
 
 histo_bins["dnnPisa_pred_atanh"] = {
     "2016":{
-        "h_peak": np.array([0, 1.09, 1.43333333333, 1.72666666667, 2.00333333333, 2.21166666667, 2.38, 2.555, 2.71833333333, 2.885, 3.095, 3.34, 5.0], dtype=np.float32),
-        "z_peak": np.array([0, 1.09, 1.43333333333, 1.72666666667, 2.00333333333, 2.21166666667, 2.38, 2.555, 2.71833333333, 2.885, 3.095, 3.34, 5.0], dtype=np.float32),
-        "h_sideband": np.array([0, 1.09, 1.43333333333, 1.72666666667, 2.00333333333, 2.21166666667, 2.38, 2.555, 2.71833333333, 2.885, 3.095, 3.34, 5.0], dtype=np.float32),
+        "h_peak": np.array([0., 0.79687814, 0.89234767, 0.93866078, 0.96426233, 0.97629594, 0.98301427, 0.98800027, 0.99132981, 0.99377989, 0.99590873, 0.99749159, 1.0], dtype=np.float32),
+        "z_peak": np.array([0., 0.79687814, 0.89234767, 0.93866078, 0.96426233, 0.97629594, 0.98301427, 0.98800027, 0.99132981, 0.99377989, 0.99590873, 0.99749159, 1.0], dtype=np.float32),
+        "h_sideband": np.array([0., 0.79687814, 0.89234767, 0.93866078, 0.96426233, 0.97629594, 0.98301427, 0.98800027, 0.99132981, 0.99377989, 0.99590873, 0.99749159, 1.0], dtype=np.float32),
     },
     "2017":{
-        "h_peak": np.array([0, 1.09, 1.43333333333, 1.72666666667, 2.00333333333, 2.21166666667, 2.38, 2.555, 2.71833333333, 2.885, 3.095, 3.34, 5.0], dtype=np.float32),
-        "z_peak": np.array([0, 1.09, 1.43333333333, 1.72666666667, 2.00333333333, 2.21166666667, 2.38, 2.555, 2.71833333333, 2.885, 3.095, 3.34, 5.0], dtype=np.float32),
-        "h_sideband": np.array([0, 1.09, 1.43333333333, 1.72666666667, 2.00333333333, 2.21166666667, 2.38, 2.555, 2.71833333333, 2.885, 3.095, 3.34, 5.0], dtype=np.float32),
+        "h_peak": np.array([0., 0.79687814, 0.89234767, 0.93866078, 0.96426233, 0.97629594, 0.98301427, 0.98800027, 0.99132981, 0.99377989, 0.99590873, 0.99749159, 1.0], dtype=np.float32),
+        "z_peak": np.array([0., 0.79687814, 0.89234767, 0.93866078, 0.96426233, 0.97629594, 0.98301427, 0.98800027, 0.99132981, 0.99377989, 0.99590873, 0.99749159, 1.0], dtype=np.float32),
+        "h_sideband": np.array([0., 0.79687814, 0.89234767, 0.93866078, 0.96426233, 0.97629594, 0.98301427, 0.98800027, 0.99132981, 0.99377989, 0.99590873, 0.99749159, 1.0], dtype=np.float32),
 
     },
     "2018":{
-        "h_peak": np.array([0 , 0.623333333333 , 1.34166666667 , 1.70166666667 , 1.98333333333 , 2.22166666667 , 2.42 , 2.58666666667 , 2.74166666667 ,2.9 , 3.06166666667 , 3.24166666667 , 3.48 , 5.0 ], dtype=np.float32),
+        
+        "h_peak": np.array([0.,0.55344462, 0.87207198, 0.9356171, 0.96283095, 0.97675986, 0.98430995, 0.98873253, 0.99172348, 0.99396317, 0.9956273, 0.99694725, 0.99810361, 1.0], dtype=np.float32),
 
-        "z_peak": np.array([0 , 0.623333333333 , 1.34166666667 , 1.70166666667 ,1.98333333333 , 2.22166666667 , 2.42 , 2.58666666667 , 2.74166666667 ,2.9 , 3.06166666667 , 3.24166666667 , 3.48 , 5.0 ], dtype=np.float32),
+        "z_peak": np.array([0.,0.55344462, 0.87207198, 0.9356171, 0.96283095, 0.97675986, 0.98430995, 0.98873253, 0.99172348, 0.99396317, 0.9956273, 0.99694725, 0.99810361, 1.0], dtype=np.float32),
 
-        "h_sideband": np.array([0 , 0.623333333333 , 1.34166666667 , 1.70166666667 ,1.98333333333 , 2.22166666667 , 2.42 , 2.58666666667 , 2.74166666667 , 2.9 , 3.06166666667 , 3.24166666667 , 3.48 , 5.0 ], dtype=np.float32),
+        "h_sideband": np.array([0.,0.55344462, 0.87207198, 0.9356171, 0.96283095, 0.97675986, 0.98430995, 0.98873253, 0.99172348, 0.99396317, 0.9956273, 0.99694725, 0.99810361, 1.0], dtype=np.float32),
     },
 }
 analysis_parameters["baseline"]["histo_bins"] = histo_bins

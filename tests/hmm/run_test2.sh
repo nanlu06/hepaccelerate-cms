@@ -30,7 +30,12 @@ export CACHEPATH=/storage/user/nlu/hmm/skim_merged
 singularity exec --nv -B /storage $SINGULARITY_IMAGE python3 tests/hmm/analysis_hmumu.py \
     --action analyze --action merge --maxchunks $MAXCHUNKS \
     --nthreads $NTHREADS \
-    --out ./out \
+    --do-fsr \
+    --out ./out --eras 2018 --datasets dy_m105_160_vbf_amc_2j \
     --datapath $INPUTDATAPATH \
     --cachepath $CACHEPATH \
     --datasets-yaml data/datasets_NanoAODv6_Run2_mixv1.yml
+
+
+#--eras 2016 --datasets vbf_powheg_pythia_dipole_125 \
+
