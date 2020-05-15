@@ -21,7 +21,7 @@ categories = {
             "st_tw_antitop",
             "ttjets_sl", "ttjets_dl",
             "dy",
-            #"www","wwz","wzz","zzz",
+            "www","wwz","wzz","zzz",
         ],
     },
     "z_peak": {
@@ -44,7 +44,7 @@ categories = {
             "st_tw_antitop",
             "ttjets_sl", "ttjets_dl",
             "dy_0j", "dy_1j", "dy_2j",
-            #"www","wwz","wzz","zzz",
+            "www","wwz","wzz","zzz",
         ],
     },
     "h_sideband": {
@@ -70,7 +70,7 @@ categories = {
             "ttjets_sl", "ttjets_dl",
             "dy_m105_160_amc_01j", "dy_m105_160_vbf_amc_01j",
             "dy_m105_160_amc_2j", "dy_m105_160_vbf_amc_2j",
-            #"www","wwz","wzz","zzz",
+            "www","wwz","wzz","zzz",
         ],
     },
     "h_peak": {
@@ -96,16 +96,14 @@ categories = {
             "ttjets_sl", "ttjets_dl",
             "dy_m105_160_amc_01j", "dy_m105_160_vbf_amc_01j",
             "dy_m105_160_amc_2j", "dy_m105_160_vbf_amc_2j",
-            #"www","wwz","wzz","zzz",
+            "www","wwz","wzz","zzz",
         ],
     }
 }
 proc_grps = [
         ("vh_125",["wmh_125", "wph_125", "zh_125"]),
-        ("vv", ["wz_3lnu", "ww_2l2nu", "wz_2l2q", "zz"]),
-        ("vvv", ["www","wwz","wzz","zzz"]),
-        ("stop", ["st_tw_top", "st_tw_antitop"]),
-        ("tt", ["ttjets_sl", "ttjets_dl",]),
+        ("vv", ["wz_3lnu", "ww_2l2nu", "wz_2l2q", "zz", "www","wwz","wzz","zzz"]),
+        ("top", ["ttjets_sl", "ttjets_dl", "st_tw_top", "st_tw_antitop"]),
     ]
 combined_signal_samples= ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125", "vh_125", "tth_125"]
 combined_categories = {
@@ -122,8 +120,7 @@ combined_categories = {
             "ewk_lljj_mll50_mjj120_herwig",
             #"st_top",
             #"st_t_antitop",
-            "stop",
-            "tt",
+            "top"
             "dy",
             #"vvv",
         ],
@@ -141,8 +138,7 @@ combined_categories = {
             "ewk_lljj_mll50_mjj120_herwig",
             #"st_top",
             #"st_t_antitop",
-            "stop",
-            "tt",
+            "top"
             "dy_0j", "dy_1j", "dy_2j",
             #"vvv",
         ],
@@ -162,8 +158,7 @@ combined_categories = {
             "ewk_lljj_mll105_160_pythia",
             #"st_top",
             #"st_t_antitop",
-            "stop",
-            "tt",
+            "top"
             "dy_m105_160_amc_01j", "dy_m105_160_vbf_amc_01j",
             "dy_m105_160_amc_2j", "dy_m105_160_vbf_amc_2j",
             #"vvv",
@@ -184,8 +179,7 @@ combined_categories = {
             "ewk_lljj_mll105_160_pythia",
             #"st_top",
             #"st_t_antitop",
-            "stop",
-            "tt",
+            "top"
             "dy_m105_160_amc_01j", "dy_m105_160_vbf_amc_01j",
             "dy_m105_160_amc_2j", "dy_m105_160_vbf_amc_2j",
             #"vvv",
@@ -196,8 +190,7 @@ combined_categories = {
 colors = {
     "dy": (254, 254, 83),
     "ewk": (109, 253, 245),
-    "stop": (236, 76, 105),
-    "tt": (67, 150, 42),
+    "top": (67, 150, 42),
     "vvv": (247, 206, 205),
     "vv": (100, 105, 98),
     "higgs": (0, 0, 0),
@@ -210,8 +203,7 @@ process_groups = [
     ("vv", ["wz_3lnu", "ww_2l2nu", "wz_2l2q", "zz"]),
     ("vvv", ["www","wwz","wzz","zzz"]),
     ("ewk", ["ewk_lljj_mll50_mjj120_herwig", "ewk_lljj_mll105_160_ptJ_herwig"]),
-    ("stop", ["st_tw_top", "st_tw_antitop"]),
-    ("tt", ["ttjets_sl", "ttjets_dl",]),
+    ("top", ["ttjets_sl", "ttjets_dl", "st_tw_top", "st_tw_antitop"]),
     ("dy", ["dy_0j", "dy_1j", "dy_2j", "dy_m105_160_amc_01j", "dy_m105_160_vbf_amc_01j", "dy_m105_160_amc_2j", "dy_m105_160_vbf_amc_2j", "dy"]),
 ]
 
@@ -518,8 +510,7 @@ scale_uncertainties = {
     "zz": {"VVxsec": 1.10},
     "wjets": {"WJetsxsec": 1.10},
     "vv" :{"VVxsec": 1.10},
-    "stop": {"STxsec": 1.05},
-    "tt" : {"TTxsec": 1.05},
+    "top": {"STxsec": 1.05},
     #"dy_m105_160_amc": {"DYxsec": 1.10},
     #"dy_m105_160__vbf_amc": {"DYxsec": 1.10},
     #"ewk_lljj_mll105_160_ptJ": {"EWZxsec": 1.20},

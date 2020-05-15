@@ -278,30 +278,30 @@ datasets:
   is_mc: true
   name: zz
   skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
-#- era: "2017"
-#  files_merged: /store/mc/RunIIFall17NanoAODv6/WWW_4F_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
-#  files_nano_in: /store/mc/RunIIFall17NanoAODv6/WWW_4F_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
-#  is_mc: true
-#  name: www
-#  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
-#- era: "2017"
-#  files_merged: /store/mc/RunIIFall17NanoAODv6/WWZ_4F_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
-#  files_nano_in: /store/mc/RunIIFall17NanoAODv6/WWZ_4F_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
-#  is_mc: true
-#  name: wwz
-#  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
-#- era: "2017"
-#  files_merged: /store/mc/RunIIFall17NanoAODv6/WZZ_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
-#  files_nano_in: /store/mc/RunIIFall17NanoAODv6/WZZ_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
-#  is_mc: true
-#  name: wzz
-#  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
-#- era: "2017"
-#  files_merged: /store/mc/RunIIFall17NanoAODv6/ZZZ_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
-#  files_nano_in: /store/mc/RunIIFall17NanoAODv6/ZZZ_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
-#  is_mc: true
-#  name: zzz
-#  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
+- era: "2017"
+  files_merged: /store/mc/RunIIFall17NanoAODv6/WWW_4F_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
+  files_nano_in: /store/mc/RunIIFall17NanoAODv6/WWW_4F_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
+  is_mc: true
+  name: www
+  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
+- era: "2017"
+  files_merged: /store/mc/RunIIFall17NanoAODv6/WWZ_4F_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
+  files_nano_in: /store/mc/RunIIFall17NanoAODv6/WWZ_4F_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
+  is_mc: true
+  name: wwz
+  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
+- era: "2017"
+  files_merged: /store/mc/RunIIFall17NanoAODv6/WZZ_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
+  files_nano_in: /store/mc/RunIIFall17NanoAODv6/WZZ_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
+  is_mc: true
+  name: wzz
+  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
+- era: "2017"
+  files_merged: /store/mc/RunIIFall17NanoAODv6/ZZZ_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
+  files_nano_in: /store/mc/RunIIFall17NanoAODv6/ZZZ_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
+  is_mc: true
+  name: zzz
+  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
 - era: "2016"
   files_merged: /store/data/Run2016/SingleMuon/NANOAOD/NanoV8aPisa-v1/merged_*.root
   files_nano_in: /store/data/Run2016*/SingleMuon/NANOAOD/NanoV8aPisa-v1/*/*.root
@@ -692,30 +692,30 @@ datasets:
 #  is_mc: true
 #  name: bbh_125
 #  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
-#- era: "2016"
-#  files_merged: /store/mc/RunIISummer16NanoAODv6/WWW_4F_TuneCUETP8M1_13TeV-amcatnlo-pythia8/merged_*.root
-#  files_nano_in: /store/mc/RunIISummer16NanoAODv6/WWW_4F_TuneCUETP8M1_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
-#  is_mc: true
-#  name: www
-#  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
-#- era: "2016"
-#  files_merged: /store/mc/RunIISummer16NanoAODv6/WWZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/merged_*.root
-#  files_nano_in: /store/mc/RunIISummer16NanoAODv6/WWZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
-#  is_mc: true
-#  name: wwz
-#  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
-#- era: "2016"
-#  files_merged: /store/mc/RunIISummer16NanoAODv6/WZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/merged_*.root
-#  files_nano_in: /store/mc/RunIISummer16NanoAODv6/WZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
-#  is_mc: true
-#  name: wzz
-#  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
-#- era: "2016"
-#  files_merged: /store/mc/RunIISummer16NanoAODv6check/ZZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/merged_*.root
-#  files_nano_in: /store/mc/RunIISummer16NanoAODv6/ZZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
-#  is_mc: true
-#  name: zzz
-#  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
+- era: "2016"
+  files_merged: /store/mc/RunIISummer16NanoAODv6/WWW_4F_TuneCUETP8M1_13TeV-amcatnlo-pythia8/merged_*.root
+  files_nano_in: /store/mc/RunIISummer16NanoAODv6/WWW_4F_TuneCUETP8M1_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
+  is_mc: true
+  name: www
+  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
+- era: "2016"
+  files_merged: /store/mc/RunIISummer16NanoAODv6/WWZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/merged_*.root
+  files_nano_in: /store/mc/RunIISummer16NanoAODv6/WWZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
+  is_mc: true
+  name: wwz
+  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
+- era: "2016"
+  files_merged: /store/mc/RunIISummer16NanoAODv6/WZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/merged_*.root
+  files_nano_in: /store/mc/RunIISummer16NanoAODv6/WZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
+  is_mc: true
+  name: wzz
+  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
+- era: "2016"
+  files_merged: /store/mc/RunIISummer16NanoAODv6check/ZZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/merged_*.root
+  files_nano_in: /store/mc/RunIISummer16NanoAODv6/ZZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
+  is_mc: true
+  name: zzz
+  skim_cut: "(HLT_IsoMu24 || HLT_IsoTkMu24) && nMuon>=2"
 - era: "2018"
   files_merged: /store/data/Run2018/SingleMuon/NANOAOD/NanoV8aPisa-v1/merged_*.root
   files_nano_in: /store/data/Run2018*/SingleMuon/NANOAOD/NanoV8aPisa-v1/*/*.root
@@ -974,27 +974,27 @@ datasets:
   is_mc: true
   name: zh_125
   skim_cut: "HLT_IsoMu24 && nMuon>=2"
-#- era: "2018"
-#  files_merged: /store/mc/RunIIAutumn18NanoAODv6/WWW_4F_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
-#  files_nano_in: /store/mc/RunIIAutumn18NanoAODv6/WWW_4F_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
-#  is_mc: true
-#  name: www
-#  skim_cut: "HLT_IsoMu24 && nMuon>=2"
-#- era: "2018"
-#  files_merged: /store/mc/RunIIAutumn18NanoAODv6/WWZ_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
-#  files_nano_in: /store/mc/RunIIAutumn18NanoAODv6/WWZ_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
-#  is_mc: true
-#  name: wwz
-#  skim_cut: "HLT_IsoMu24 && nMuon>=2"
-#- era: "2018"
-#  files_merged: /store/mc/RunIIAutumn18NanoAODv6/WZZ_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
-#  files_nano_in: /store/mc/RunIIAutumn18NanoAODv6/WZZ_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
-#  is_mc: true
-#  name: wzz
-#  skim_cut: "HLT_IsoMu24 && nMuon>=2"
-#- era: "2018"
-#  files_merged: /store/mc/RunIIAutumn18NanoAODv6/ZZZ_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
-#  files_nano_in: /store/mc/RunIIAutumn18NanoAODv6/ZZZ_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
-#  is_mc: true
-#  name: zzz
-#  skim_cut: "HLT_IsoMu24 && nMuon>=2"
+- era: "2018"
+  files_merged: /store/mc/RunIIAutumn18NanoAODv6/WWW_4F_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
+  files_nano_in: /store/mc/RunIIAutumn18NanoAODv6/WWW_4F_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
+  is_mc: true
+  name: www
+  skim_cut: "HLT_IsoMu24 && nMuon>=2"
+- era: "2018"
+  files_merged: /store/mc/RunIIAutumn18NanoAODv6/WWZ_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
+  files_nano_in: /store/mc/RunIIAutumn18NanoAODv6/WWZ_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
+  is_mc: true
+  name: wwz
+  skim_cut: "HLT_IsoMu24 && nMuon>=2"
+- era: "2018"
+  files_merged: /store/mc/RunIIAutumn18NanoAODv6/WZZ_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
+  files_nano_in: /store/mc/RunIIAutumn18NanoAODv6/WZZ_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
+  is_mc: true
+  name: wzz
+  skim_cut: "HLT_IsoMu24 && nMuon>=2"
+- era: "2018"
+  files_merged: /store/mc/RunIIAutumn18NanoAODv6/ZZZ_TuneCP5_13TeV-amcatnlo-pythia8/merged_*.root
+  files_nano_in: /store/mc/RunIIAutumn18NanoAODv6/ZZZ_TuneCP5_13TeV-amcatnlo-pythia8/NANOAODSIM/*/*/*.root
+  is_mc: true
+  name: zzz
+  skim_cut: "HLT_IsoMu24 && nMuon>=2"
