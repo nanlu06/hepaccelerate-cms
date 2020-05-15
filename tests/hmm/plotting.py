@@ -938,6 +938,7 @@ def PrintDatacard(categories, dict_procs, era, event_counts, filenames, ofname):
             if proc not in remove_proc:
                 all_shape_uncerts.extend(cat.shape_uncertainties[proc].keys())
                 all_scale_uncerts.extend(cat.scale_uncertainties[proc].keys())
+            
     # Uniquify
     all_shape_uncerts = sorted(list(set(all_shape_uncerts)))
     all_scale_uncerts = sorted(list(set(all_scale_uncerts)))
@@ -1153,6 +1154,7 @@ if __name__ == "__main__":
             int_lumi = res["data"]["int_lumi"]
             for mc_samp in res.keys():
                 if mc_samp != "data":
+                    print(mc_samp)
                     genweights[mc_samp] = res[mc_samp]["genEventSumw"]
                     weight_xs[mc_samp] = get_cross_section(cross_sections, mc_samp, era) * int_lumi / genweights[mc_samp]
            
@@ -1244,10 +1246,10 @@ if __name__ == "__main__":
                                 plot_args_shape_syst += [(
                                     histos, hdata, mc_samp, analysis,
                                     var, "nominal", weight_xs, int_lumi, outdir, era, unc)]
-        rets = list(pool.map(make_pdf_plot, plot_args))
+        #rets = list(pool.map(make_pdf_plot, plot_args))
         #rets = list(pool.map(make_pdf_plot, plot_args_weights_off))
         rets = list(pool.map(create_datacard_combine_wrap, datacard_args))
-        rets = list(pool.map(plot_variations, plot_args_shape_syst))
+        #rets = list(pool.map(plot_variations, plot_args_shape_syst))
 
         #for args, retval in zip(datacard_args, rets):
         #    res, hd, mc_samples, analysis, var, weight, weight_xs, int_lumi, outdir, datataking_year = args
