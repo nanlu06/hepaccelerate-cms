@@ -938,7 +938,6 @@ def PrintDatacard(categories, dict_procs, era, event_counts, filenames, ofname):
             if proc not in remove_proc:
                 all_shape_uncerts.extend(cat.shape_uncertainties[proc].keys())
                 all_scale_uncerts.extend(cat.scale_uncertainties[proc].keys())
-            
     # Uniquify
     all_shape_uncerts = sorted(list(set(all_shape_uncerts)))
     all_scale_uncerts = sorted(list(set(all_scale_uncerts)))
