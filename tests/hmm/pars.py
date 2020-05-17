@@ -445,7 +445,7 @@ btag_unc = ["btag_weight_jes","btag_weight_lf","btag_weight_hfstats1","btag_weig
 
 shape_systematics = jec_unc + jer_unc + VBF_STXS_unc + btag_unc + ["trigger", "id", "iso", "jet_puid", "qgl_weight", "puWeight", "L1PreFiringWeight","DYLHEScaleWeightZ","EWZLHEScaleWeightZ","DYLHEScaleWeight","EWZLHEScaleWeight","LHEPdfWeight","EWZ105160PS", "VBFHPS","DYshape_DNN"] 
 
-decorrelate_syst = jer_unc + btag_unc + ["trigger", "id", "iso", "jet_puid", "qgl_weight", "puWeight", "L1PreFiringWeight", "DYLHEScaleWeight","EWZLHEScaleWeight","EWKLHEScaleWeight_norm", "LHEPdfWeight","LHEPdfWeight_norm","EWZ105160PS", "VBFHPS","DYshape_DNN","TTxsec","STxsec","VVxsec"] 
+decorrelate_syst = jer_unc + btag_unc + ["trigger", "id", "iso", "jet_puid", "qgl_weight", "puWeight", "L1PreFiringWeight", "DYLHEScaleWeight","EWZLHEScaleWeight","EWKLHEScaleWeight_norm", "LHEPdfWeight","LHEPdfWeight_norm","EWZ105160PS", "VBFHPS","DYshape_DNN","Topxsec","VVxsec"] 
 
 common_scale_uncertainties = {
     "lumi2016": {
@@ -510,17 +510,17 @@ scale_uncertainties = {
     "zz": {"VVxsec": 1.10},
     "wjets": {"WJetsxsec": 1.10},
     "vv" :{"VVxsec": 1.10},
-    "top": {"STxsec": 1.05},
+    "top": {"Topxsec": 1.05},
     #"dy_m105_160_amc": {"DYxsec": 1.10},
     #"dy_m105_160__vbf_amc": {"DYxsec": 1.10},
     #"ewk_lljj_mll105_160_ptJ": {"EWZxsec": 1.20},
     #"ewk_lljj_mll50_mjj120": {"EWZxsecZ": 1.20},
-    "ttjets_sl": {"TTxsec": 1.05},
-    "ttjets_dl": {"TTxsec": 1.05},
-    "st_t_top": {"STxsec": 1.05},
-    "st_t_antitop": {"STxsec": 1.05},
-    "st_tw_top": {"STxsec": 1.05},
-    "st_tw_antitop": {"STxsec": 1.05},
+    #"ttjets_sl": {"TTxsec": 1.05},
+    #"ttjets_dl": {"TTxsec": 1.05},
+    #"st_t_top": {"STxsec": 1.05},
+    #"st_t_antitop": {"STxsec": 1.05},
+    #"st_tw_top": {"STxsec": 1.05},
+    #"st_tw_antitop": {"STxsec": 1.05},
 }
 
 HSTXS_rel = {
