@@ -62,7 +62,7 @@ categories = {
             "ww_2l2nu", "wz_2l2q", "zz",
             "ewk_lljj_mll105_160_ptJ_herwig",
             "ewk_lljj_mll105_160_herwig",
-            "ewk_lljj_mll105_160_pythia",
+            "ewk_lljj_mll105_160_dipole_pythia",
             #"st_top",
             #"st_t_antitop",
             "st_tw_top",
@@ -88,7 +88,7 @@ categories = {
             "ww_2l2nu", "wz_2l2q", "zz",
             "ewk_lljj_mll105_160_ptJ_herwig",
             "ewk_lljj_mll105_160_herwig",
-            "ewk_lljj_mll105_160_pythia",
+            "ewk_lljj_mll105_160_dipole_pythia",
             #"st_top",
             #"st_t_antitop",
             "st_tw_top",
@@ -155,7 +155,7 @@ combined_categories = {
             "vv", 
             "ewk_lljj_mll105_160_ptJ_herwig",
             "ewk_lljj_mll105_160_herwig",
-            "ewk_lljj_mll105_160_pythia",
+            "ewk_lljj_mll105_160_dipole_pythia",
             #"st_top",
             #"st_t_antitop",
             "top",
@@ -176,7 +176,7 @@ combined_categories = {
             "vv", 
             "ewk_lljj_mll105_160_ptJ_herwig",
             "ewk_lljj_mll105_160_herwig",
-            "ewk_lljj_mll105_160_pythia",
+            "ewk_lljj_mll105_160_dipole_pythia",
             #"st_top",
             #"st_t_antitop",
             "top",
@@ -196,7 +196,7 @@ colors = {
     "higgs": (0, 0, 0),
 }
 
-remove_proc = ["vbf_powheg_pythia_dipole_125_ref","vbf_powheg_herwig_125","ewk_lljj_mll105_160_herwig", "ewk_lljj_mll105_160_pythia"]
+remove_proc = ["vbf_powheg_pythia_dipole_125_ref","vbf_powheg_herwig_125","ewk_lljj_mll105_160_herwig", "ewk_lljj_mll105_160_dipole_pythia"]
 
 process_groups = [
     ("higgs", ["ggh_amcPS_pythia_125", "vbf_powheg_pythia_dipole_125", "wmh_125", "wph_125", "zh_125", "tth_125"]),
@@ -388,7 +388,7 @@ cross_sections = {
     "st_t_antitop": 80.95,
     "st_tw_top": 35.85,
     "st_tw_antitop": 35.85,
-    "ewk_lljj_mll105_160_pythia": 0.0508896,
+    "ewk_lljj_mll105_160_dipole_pythia": 0.0508896,
     "ewk_lljj_mll105_160_herwig": 0.0508896,
     "ewk_lljj_mll105_160_ptJ_herwig": {"2016": 0.07486, "2017": 0.0789, "2018": 0.0789}, #from Pisa Group https://github.com/arizzi/PisaHmm/blob/59bbce76ab1532c59b44b41a9371591204f24df6/samples2016.py#L30
 
@@ -781,7 +781,7 @@ analysis_parameters = {
         "extra_electrons_iso": 0.4, #Check if we want to apply this
         "extra_electrons_id": "mvaFall17V2Iso_WP90",
 
-        "save_dnn_vars": True,
+        "save_dnn_vars": False,
         "dnn_vars_path": "out/dnn_vars",
         #If true, apply mjj > cut, otherwise inverse
         "vbf_filter_mjj_cut": 350,
@@ -866,7 +866,7 @@ analysis_parameters = {
 
         "do_bdt_ucsd": False,
         "do_dnn_pisa": True,
-        "do_dnn_cit": True,
+        "do_dnn_cit": False,
     }, #end of baseline
 }
 

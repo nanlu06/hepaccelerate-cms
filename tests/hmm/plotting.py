@@ -209,7 +209,7 @@ def plot_variations(args):
             )
         
     if('EWZ105160PS' in unc) and ('ewk_lljj_mll105_160_ptJ_herwig' in mc_samp):
-        h_ps_pythia = res["ewk_lljj_mll105_160_pythia"]["nominal"]* weight_xs["ewk_lljj_mll105_160_pythia"]
+        h_ps_pythia = res["ewk_lljj_mll105_160_dipole_pythia"]["nominal"]* weight_xs["ewk_lljj_mll105_160_dipole_pythia"]
         h_ps_herwig = res["ewk_lljj_mll105_160_herwig"]["nominal"]* weight_xs["ewk_lljj_mll105_160_herwig"]
         h_nom_up = copy.deepcopy(hnom)
         h_nom_down = copy.deepcopy(hnom)
@@ -224,7 +224,7 @@ def plot_variations(args):
                        kwargs_step={"label": "down "+"({0:.3E})".format(np.sum(h_nom_down.contents))},
             )
 
-    if((('DYLHEScaleWeight' in unc) and ('dy' in mc_samp)) or (('EWZLHEScaleWeight' in unc) and ('ewk' in mc_samp) )):
+    if((('DYLHEScaleWeight' in unc) and ('dy' in mc_samp)) or (('EWZLHEScaleWeight' in unc) and ('ewk_lljj_mll105_160_ptJ_herwig' in mc_samp) )):
         
         h_lhe =[]
         h_nom_up = copy.deepcopy(hnom)
@@ -254,7 +254,7 @@ def plot_variations(args):
                        kwargs_step={"label": "down "+"({0:.3E})".format(np.sum(h_nom_down.contents))},
             )
 
-    if(('LHEPdfWeight' in unc) and ("dy" in mc_samp or "ewk" in mc_samp or "ggh" in mc_samp or "vbf" in mc_samp or "wph" in mc_samp or "wmh" in mc_samp or "tth" in mc_samp)):
+    if(('LHEPdfWeight' in unc) and ("dy" in mc_samp or "ewk_lljj_mll105_160_ptJ_herwig" in mc_samp or "ggh" in mc_samp or "vbf" in mc_samp or "wph" in mc_samp or "wmh" in mc_samp or "tth" in mc_samp)):
         h_pdf =[]
         h_pdf_up = copy.deepcopy(hnom)
         h_pdf_down = copy.deepcopy(hnom)
@@ -542,22 +542,22 @@ def create_variated_histos(weight_xs, proc,
         if('dy' in proc and '160' in proc):
             ret['DYLHEScaleWeightUp']=h_nom_up
             ret['DYLHEScaleWeightDown']=h_nom_down
-        elif('ewk' in proc and '160' in proc):
+        elif('ewk_lljj_mll105_160_ptJ_herwig' in proc):
             ret['EWZLHEScaleWeightUp']=h_nom_up
             ret['EWZLHEScaleWeightDown']=h_nom_down
         elif('dy' in proc):
             ret['DYLHEScaleWeightZUp']=h_nom_up
             ret['DYLHEScaleWeightZDown']=h_nom_down
-        elif('ewk' in proc):
-            ret['EWZLHEScaleWeightZUp']=h_nom_up
-            ret['EWZLHEScaleWeightZDown']=h_nom_down
+        #elif('ewk' in proc):
+        #    ret['EWZLHEScaleWeightZUp']=h_nom_up
+        #    ret['EWZLHEScaleWeightZDown']=h_nom_down
     
     if('LHEPdfWeight' in variations):
         h_pdf =[]
         h_pdf_up = copy.deepcopy(hbase)
         h_pdf_down = copy.deepcopy(hbase)
         h_pdf_nom = copy.deepcopy(hbase)
-        if "dy" in proc or "ewk" in proc or "ggh" in proc or "vbf" in proc or "zh_125" in proc or "wmh_125" in proc or "wph_125" in proc or "tth" in proc:
+        if "dy" in proc or "ewk_lljj_mll105_160_ptJ_herwig" in proc or "ggh" in proc or "vbf" in proc or "zh_125" in proc or "wmh_125" in proc or "wph_125" in proc or "tth" in proc:
             h_nom = np.zeros_like(hbase.contents)
             n_pdf =0
             for i in range(lhe_pdf_variations[str(era)]):
@@ -610,7 +610,7 @@ def create_datacard(dict_procs, parameter_name, all_processes, histname, baselin
         rr = dict_procs[proc]
         _variations = variations
         
-        ps_pythia = 'ewk_lljj_mll105_160_pythia'
+        ps_pythia = 'ewk_lljj_mll105_160_dipole_pythia'
         ps_herwig = 'ewk_lljj_mll105_160_herwig'
         if ((ps_pythia in dict_procs.keys()) and (ps_herwig in dict_procs.keys())):
             rr_ps_pythia = dict_procs[ps_pythia]
@@ -965,7 +965,7 @@ def PrintDatacard(categories, dict_procs, era, event_counts, filenames, ofname):
         for proc in cat.processes:
             if proc in remove_proc:
                 continue
-            elif ('ewk' in proc):
+            elif ('ewk_lljj_mll105_160_ptJ_herwig' in proc):
                 dcof.write(str(1.0))
             else:
                 dcof.write("-")
@@ -1006,7 +1006,7 @@ def PrintDatacard(categories, dict_procs, era, event_counts, filenames, ofname):
         for proc in cat.processes:
             if proc in remove_proc:
                 continue
-            elif "dy" in proc or "ewk" in proc or "ggh" in proc or "vbf" in proc or "vh" in proc or "tth" in proc:
+            elif "dy" in proc or "ewk_lljj_mll105_160_ptJ_herwig" in proc or "ggh" in proc or "vbf" in proc or "vh" in proc or "tth" in proc:
                 if("vh" not in proc):
                     Pdf_norm = calculate_LHEPdf_norm(dict_procs[proc], era, proc)
                     dcof.write("{0:.3f}".format(1.0 + Pdf_norm))
@@ -1046,7 +1046,7 @@ def PrintDatacard(categories, dict_procs, era, event_counts, filenames, ofname):
 
     for cat in categories:
         for proc in cat.processes:
-            if "ewk" in proc:
+            if "ewk_lljj_mll105_160_ptJ_herwig" in proc:
                 QCD_norm = calculate_LHEscale_norm(dict_procs[proc], era)
                 dcof.write("{0:.2f}".format(1.0 + QCD_norm))
             else:
@@ -1244,10 +1244,10 @@ if __name__ == "__main__":
                                 plot_args_shape_syst += [(
                                     histos, hdata, mc_samp, analysis,
                                     var, "nominal", weight_xs, int_lumi, outdir, era, unc)]
-        rets = list(pool.map(make_pdf_plot, plot_args))
+        #rets = list(pool.map(make_pdf_plot, plot_args))
         #rets = list(pool.map(make_pdf_plot, plot_args_weights_off))
         rets = list(pool.map(create_datacard_combine_wrap, datacard_args))
-        rets = list(pool.map(plot_variations, plot_args_shape_syst))
+        #rets = list(pool.map(plot_variations, plot_args_shape_syst))
 
         #for args, retval in zip(datacard_args, rets):
         #    res, hd, mc_samples, analysis, var, weight, weight_xs, int_lumi, outdir, datataking_year = args
