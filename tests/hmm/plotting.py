@@ -210,11 +210,10 @@ def plot_variations(args):
         
     if('EWZ105160PS' in unc) and ('ewk_lljj_mll105_160_ptJ_herwig' in mc_samp):
         h_ps_pythia = res["ewk_lljj_mll105_160_dipole_pythia"]["nominal"]* weight_xs["ewk_lljj_mll105_160_dipole_pythia"]
-        h_ps_herwig = res["ewk_lljj_mll105_160_herwig"]["nominal"]* weight_xs["ewk_lljj_mll105_160_herwig"]
         h_nom_up = copy.deepcopy(hnom)
         h_nom_down = copy.deepcopy(hnom)
-        h_nom_up.contents = hnom.contents - 0.2*(h_ps_pythia.contents - h_ps_herwig.contents)
-        h_nom_down.contents = hnom.contents + 0.2*(h_ps_pythia.contents - h_ps_herwig.contents)
+        h_nom_up.contents = hnom.contents - (h_ps_pythia.contents - hnom.contents)
+        h_nom_down.contents = hnom.contents + (h_ps_pythia.contents - hnom.contents)
         plot_hist_step(ax, h_nom_up.edges, h_nom_up.contents,
                 np.sqrt(h_nom_up.contents_w2),
                        kwargs_step={"label": "up "+"({0:.3E})".format(np.sum(h_nom_up.contents))},
@@ -455,7 +454,7 @@ def mask_inv_mass(hist):
     hist["contents_w2"][bin_idx1:bin_idx2] = 0.0
 
 def create_variated_histos(weight_xs, proc,
-                           hdict, hdict_vbf_ps_ref, vbf_ps_ref, hdict_vbf_ps_herwig, vbf_ps_herwig, hdict_ps_pythia, ps_pythia, hdict_ps_herwig, ps_herwig, era, histname,
+                           hdict, hdict_vbf_ps_ref, vbf_ps_ref, hdict_vbf_ps_herwig, vbf_ps_herwig, hdict_ps_pythia, ps_pythia, era, histname,
                            baseline="nominal",
                            variations=shape_systematics):
     if not baseline in hdict.keys():
@@ -502,20 +501,17 @@ def create_variated_histos(weight_xs, proc,
         
     if('EWZ105160PS' in variations) and ('ewk_lljj_mll105_160_ptJ_herwig' in proc):
         h_ps_pythia = copy.deepcopy(hdict_ps_pythia[baseline])
-        h_ps_herwig = copy.deepcopy(hdict_ps_herwig[baseline])
         hnom = copy.deepcopy(hbase)
         h_nom_up = copy.deepcopy(hbase)
         h_nom_down = copy.deepcopy(hbase)
         hnom = hnom * weight_xs[proc]
         h_ps_pythia = h_ps_pythia * weight_xs[ps_pythia]
-        h_ps_herwig = h_ps_herwig * weight_xs[ps_herwig]
-        h_nom_up.contents = hnom.contents - 0.2*(h_ps_pythia.contents - h_ps_herwig.contents)
-        h_nom_down.contents = hnom.contents + 0.2*(h_ps_pythia.contents - h_ps_herwig.contents)
+        h_nom_up.contents = hnom.contents - (h_ps_pythia.contents - hnom.contents)
+        h_nom_down.contents = hnom.contents + (h_ps_pythia.contents - hnom.contents)
         hnom = hnom * (1./weight_xs[proc])
         h_nom_up = h_nom_up * (1./weight_xs[proc])
         h_nom_down = h_nom_down * (1./ weight_xs[proc])
         h_ps_pythia = h_ps_pythia * (1./weight_xs[ps_pythia])
-        h_ps_herwig = h_ps_herwig * (1./weight_xs[ps_herwig])
         ret['EWZ105160PSUp']=h_nom_up
         ret['EWZ105160PSDown']=h_nom_down
 
@@ -611,13 +607,10 @@ def create_datacard(dict_procs, parameter_name, all_processes, histname, baselin
         _variations = variations
         
         ps_pythia = 'ewk_lljj_mll105_160_dipole_pythia'
-        ps_herwig = 'ewk_lljj_mll105_160_herwig'
-        if ((ps_pythia in dict_procs.keys()) and (ps_herwig in dict_procs.keys())):
+        if (ps_pythia in dict_procs.keys()):
             rr_ps_pythia = dict_procs[ps_pythia]
-            rr_ps_herwig = dict_procs[ps_herwig]
         else:
             rr_ps_pythia = rr
-            rr_ps_herwig = rr
             
         vbf_ps_herwig = 'vbf_powheg_herwig_125'
         vbf_ps_ref = 'vbf_powheg_pythia_dipole_125_ref'
@@ -632,7 +625,7 @@ def create_datacard(dict_procs, parameter_name, all_processes, histname, baselin
         if proc == "data":
             _variations = []
 
-        variated_histos = create_variated_histos(weight_xs, proc, rr, rr_vbf_ps_ref, vbf_ps_ref, rr_vbf_ps_herwig, vbf_ps_herwig, rr_ps_pythia, ps_pythia, rr_ps_herwig, ps_herwig, era, histname, baseline, _variations)
+        variated_histos = create_variated_histos(weight_xs, proc, rr, rr_vbf_ps_ref, vbf_ps_ref, rr_vbf_ps_herwig, vbf_ps_herwig, rr_ps_pythia, ps_pythia, era, histname, baseline, _variations)
 
         for syst_name, histo in variated_histos.items():
             if proc != "data":
@@ -1244,10 +1237,10 @@ if __name__ == "__main__":
                                 plot_args_shape_syst += [(
                                     histos, hdata, mc_samp, analysis,
                                     var, "nominal", weight_xs, int_lumi, outdir, era, unc)]
-        #rets = list(pool.map(make_pdf_plot, plot_args))
+        rets = list(pool.map(make_pdf_plot, plot_args))
         #rets = list(pool.map(make_pdf_plot, plot_args_weights_off))
         rets = list(pool.map(create_datacard_combine_wrap, datacard_args))
-        #rets = list(pool.map(plot_variations, plot_args_shape_syst))
+        rets = list(pool.map(plot_variations, plot_args_shape_syst))
 
         #for args, retval in zip(datacard_args, rets):
         #    res, hd, mc_samples, analysis, var, weight, weight_xs, int_lumi, outdir, datataking_year = args
